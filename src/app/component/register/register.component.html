@@ -1,0 +1,81 @@
+<!-- Register Start -->
+<div class="form-box" style="background-image: url('https://matsuniversity.ac.in/wp-content/uploads/2023/03/pharmacy.jpg'); background-size: cover; background-position: center;">
+    <div class="register-container" id="register">
+      <div class="top">
+        <span>Have an account? <a routerLink="/login">Login</a></span>
+        <header>Sign Up</header>
+      </div>
+      <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+        <div class="two-forms">
+          <div class="input-box">
+            <input
+              type="text"
+              class="input-field"
+              placeholder="Username"
+              [(ngModel)]="user.username"
+              name="username"
+              required
+            />
+            <i class="bx bx-user"></i>
+          </div>
+          <div class="input-box">
+            <input
+              type="text"
+              class="input-field"
+              placeholder="Name"
+              [(ngModel)]="user.name"
+              name="name"
+              required
+            />
+            <i class="bx bx-user"></i>
+          </div>
+        </div>
+        <div class="input-box">
+          <input
+            type="password"
+            class="input-field"
+            placeholder="Password"
+            [(ngModel)]="user.password"
+            name="password"
+            required
+          />
+          <i class="bx bx-envelope"></i>
+        </div>
+        <div class="input-box">
+          <input
+            type="password"
+            class="input-field"
+            placeholder="Confirm Password"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            required
+          />
+          <i class="bx bx-lock-alt"></i>
+        </div>
+        <div class="two-col">
+          <div class="one">
+            <input type="checkbox" id="register-check" />
+            <label for="register-check"> Remember Me</label>
+          </div>
+          <div class="two">
+            <label><a href="#">Terms & conditions</a></label>
+          </div>
+        </div>
+        <div class="text-center text-lg-start mt-4 pt-2">
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg"
+            style="padding-left: 2.5rem; padding-right: 2.5rem"
+          >
+            Register
+          </button>
+          <p class="small fw-bold mt-2 pt-1 mb-0">
+            Already have an account?
+            <a routerLink="/login" class="link-danger">Login</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- Register Ended -->
+  

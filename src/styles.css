@@ -1,1 +1,169 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Exo+2&display=swap");
+
+:root {
+  --primary-50: #abdbe3;
+  --primary-100: #6db6c2;
+  --primary-300: #59afbe;
+  --primary-500: #3594a5;
+  --primary-600: #6ca6b0;
+  --primary-700: #2e6974;
+  --primary-900: #1d4c54;
+  --secondary-100: #da9cd0;
+  --secondary-500: #e3abdb;
+  --secondary-900: #cc8cc2;
+  --blue-100: #bfdde3;
+  --blue-300: #abc9cf;
+  --blue-500: #99b3b8;
+  --blue-700: #8cbac2;
+  --pink-300: #e3abdb;
+  --pink-500: #e3abdb;
+  --pink-700: #e3abdb;
+  --border-radius: 4px;
+}
+
+body {
+  font-family: "Exo 2", sans-serif;
+  background-color: var(--primary-50);
+}
+
+/* text */
+.text-primary {
+  color: var(--primary-500) !important;
+}
+
+/* background */
+.bg-primary {
+  background-color: var(--primary-600) !important;
+}
+
+/* button */
+.btn {
+  border-radius: var(--border-radius);
+}
+
+.btn-primary {
+  color: var(--secondary-100);
+  background: var(--primary-500);
+  border: none;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+  color: var(--secondary-100);
+  background: var(--primary-600) !important;
+  border: none;
+}
+
+.btn-danger {
+  color: var(--secondary-100);
+  background: var(--blue-500);
+  border: none;
+}
+
+.btn-danger:hover {
+  color: var(--secondary-100);
+  background: var(--blue-700);
+  border: none;
+}
+
+.btn-success {
+  color: var(--secondary-100);
+  background: var(--pink-500);
+  border: none;
+}
+
+.btn-success:hover {
+  color: var(--secondary-100);
+  background: var(--pink-700);
+  border: none;
+}
+
+/* form */
+.form-control,
+.form-control:focus {
+  color: var(--primary-500);
+  background-color: var(--bs-body-bg);
+  border-color: var(--primary-500);
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem var(--primary-300);
+}
+
+.form-label {
+  color: var(--primary-500);
+}
+
+.border {
+  border-right-color: var(--primary-300) !important;
+}
+
+/* background color */
+.bg-body-tertiary {
+  background-color: var(--primary-100) !important;
+}
+
+/* Custom */
+.error {
+  background-color: var(--blue-100);
+  margin: 8px 0px;
+  padding: 2px 6px;
+  display: block;
+  color: var(--blue-700);
+  border-radius: var(--border-radius);
+  height: 30px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sideBarActive,
+.sideBarActive > a,
+.sideBarActive > a:hover,
+.sideBarActive > a:active {
+  color: var(--primary-500);
+  background-color: var(--primary-50) !important;
+  padding: 8px;
+}
+
+.sideBarItem,
+.sideBarItem > a {
+  color: var(--primary-500);
+  padding: 8px;
+}
+
+.sideBarItem > a:hover {
+  color: var(--primary-500);
+}
+
+.sideBarActive > .fa-solid {
+  color: var(--primary-500);
+}
+
+.sideBarItem:hover {
+  color: var(--primary-500);
+  background-color: var(--primary-50);
+  padding: 8px;
+}
+
+/* Icon */
+.fa-solid {
+  color: var(--primary-300);
+}
+
+.loader {
+  position: absolute;
+  min-height: 100vh;
+  min-width: 100vw;
+  opacity: 0.5;
+  background-color: #000;
+  z-index: 99;
+  left: 0;
+  top: 0;
+}
+
+.lottie-loader {
+  width: 150px !important;
+  height: 150px !important;
+  position: absolute;
+  top: 40%;
+  left: 45%;
+}

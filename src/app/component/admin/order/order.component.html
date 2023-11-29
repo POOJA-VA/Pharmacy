@@ -1,0 +1,29 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">userId</th>
+      <th scope="col">username</th>
+      <th scope="col">orderDetails</th>
+      <th scope="col">price</th>
+      <th scope="col">orderStatus</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let order of orderDetails">
+    <tr *ngFor="let item of order.orderedMedicineList">
+      <th>{{ order.id }}</th>
+      <td>{{ order.username }}</td>
+      <td>{{ item.title }}</td>
+      <td>{{ item.price }}</td>
+      <td>
+        <select name="status">
+          <option value="status">status</option>
+          <option>pending</option>
+          <option>out of delivery</option>
+          <option>confirmed</option>
+          <option>delivered</option>
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<a routerLink="/admin"><button>Return</button></a>

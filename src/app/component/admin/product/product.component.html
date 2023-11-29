@@ -1,0 +1,238 @@
+<!-- <div class="container" class="min-vh-100">
+      <div class="product-table">
+        <div class="cart-product">
+          <div class="table table-responsive">
+            <thead>
+              <tr>
+                <th>Medicine Id</th>
+                <th>Medicine Title</th>
+                <th>Medicine Description</th>
+                <th>Medicine Price</th>
+                <th>Date</th>
+                <th>Medicine Expiry Date</th>
+                <th>Medicine Image</th>
+                <div class="btn d-grid gap-2 d-md-flex justify-content-md-end">
+                  <button><a routerLink="/admin/form">Add Products</a></button>
+                </div>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let product of products" >
+                <td>{{ product.id }}</td>
+                <td>{{ product.title }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.date }}</td>
+                <td>Image</td>
+                <td>{{ product.expiryDate }}</td>
+                <td>
+                  <button class="btn" (click)="deleteProduct(product.id)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Product List</h1>
+  <!-- Add Products Button -->
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+    >
+      Add Product
+    </button>
+  </div>
+
+  <!-- Product Cards -->
+  <div class="row">
+    <div class="col-md-4" *ngFor="let medicine of medicines">
+      <div class="card product-card">
+        <!-- <img
+          src="product_image_url.jpg"
+          class="card-img-top"
+          alt="Product Image"
+        /> -->
+        <div class="card-body">
+          <p class="card-text">ID: {{ medicine.id }}</p>
+          <h5 class="card-title">Title: {{ medicine.title }}</h5>
+          <p class="card-text">Description: {{ medicine.description }}</p>
+          <p class="card-text">Price: {{ medicine.price }}</p>
+          <!-- <p class="card-text">Date: {{ medicine.date }}</p>
+          <p class="card-text">Expiry Date: {{ medicine.expiryDate }}</p> -->
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+              (click)="onEdit(medicine.id)"
+            >
+              <i class="fas fa-edit"></i> Edit
+            </button>
+            <button class="btn btn-danger" (click)="onDelete(medicine.id)">
+              <i class="fas fa-trash-alt"></i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">ADD PRODUCTS</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <img
+                  src="https://rishihood.edu.in/wp-content/uploads/2020/05/API-Pharmacy.jpg"
+                  class="img-fluid mb-4"
+                  alt="Pharmacy Image"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Add Medicine Form</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <form
+                          class="add-product-form"
+                          #productForm="ngForm"
+                          (ngSubmit)="onSubmit(productForm)"
+                        >
+                          <!-- <div class="mb-3">
+                          <label for="medicineId" class="form-label">Medicine ID</label>
+                          <input type="text" class="form-control" id="medicineId" placeholder="Medicine ID" name="id" [(ngModel)]="id">
+                        </div> -->
+                        <div class="mb-3">
+                          <label for="medicineTitle" class="form-label"
+                            >Medicine Image</label
+                          >
+                          <input
+                            type="file"
+                            class="input-file"
+                            id="image"
+                            name="image"
+                            [(ngModel)]="file"
+                            (change)="onFileChange($event)"
+                          />
+                        </div>
+                          <div class="mb-3">
+                            <label for="medicineTitle" class="form-label"
+                              >Medicine Title</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="title"
+                              placeholder="Medicine Title"
+                              name="title"
+                              [(ngModel)]="title"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label for="medicineDescription" class="form-label"
+                              >Medicine Description</label
+                            >
+                            <textarea
+                              class="form-control"
+                              id="medicineDescription"
+                              rows="3"
+                              placeholder="Medicine Description"
+                              name="description"
+                              [(ngModel)]="description"
+                            ></textarea>
+                          </div>
+                          <div class="mb-3">
+                            <label for="medicinePrice" class="form-label"
+                              >Medicine Price</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="medicinePrice"
+                              placeholder="Medicine Price"
+                              name="price"
+                              [(ngModel)]="price"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label for="medicineDate" class="form-label"
+                              >Medicine Date</label
+                            >
+                            <input
+                              type="date"
+                              class="form-control"
+                              id="medicineDate"
+                              name="date"
+                              [(ngModel)]="date"
+                            />
+                          </div>
+                          <div class="mb-3">
+                            <label for="medicineExpiryDate" class="form-label"
+                              >Medicine Expiry Date</label
+                            >
+                            <input
+                              type="date"
+                              class="form-control"
+                              id="medicineExpiryDate"
+                              name="expirydate"
+                              [(ngModel)]="expirydate"
+                            />
+                          </div>
+                        </form>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            type="submit"
+            (click)="onSubmit(productForm)"
+          >
+            {{ btn }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

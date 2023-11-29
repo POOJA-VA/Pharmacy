@@ -1,0 +1,37 @@
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Pharmacy Categories</h1>
+  
+  <!-- Category Form -->
+  <form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" novalidate class="d-flex">
+    <div class="me-3 flex-grow-1">
+      <input type="text" class="form-control" placeholder="Enter category name" name="title" [(ngModel)]="categoryModel.title">
+    </div>
+    <div class="me-3">
+      <button class="btn btn-primary">Add</button>
+    </div>
+  </form>
+  
+  <!-- Category Cards -->
+  <div class="row align-items-center">
+    <div class="col-md mt-5" *ngFor="let category of categories">
+      <div class="card category-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ category.title }}</h5>
+          <p class="card-text">ID: {{ category.id }}</p>
+          <!-- <div class="d-grid">
+            <button class="btn btn-primary" type="button" (click)="onEdit(category)"><i class="fa-regular fa-pen-to-square"></i></button>
+            <button class="btn btn-danger mt-2" type="button" (click)="onDelete(category.id)"><i class="fa-solid fa-trash"></i></button>
+          </div> -->
+          <div class="btn-group mr-4" role="group" aria-label="Second group">
+            <button type="button" class="btn btn-primary mr-4" type="button" (click)="onEdit(category)">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+            <button type="button" class="btn btn-danger" type="button" (click)="onDelete(category.id)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+<!-- <section class="h-100" style="background-color: #eee;">
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-10">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
+        </div>
+
+        <div class="card rounded-3 mb-4" *ngFor="let cart of carts">
+          <div class="card-body p-4">
+            <div class="row d-flex justify-content-between align-items-center">
+              <div class="col-md-2 col-lg-2 col-xl-2">
+                <p class="small text-muted mb-4 pb-2">Image</p>
+                <img src="image_source_here" class="img-fluid rounded-3" alt="Product Image">
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-3">
+                <p class="small text-muted mb-4 pb-2">Title</p>
+                <p class="lead fw-normal mb-2">{{ cart.title }}</p>
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-2 d-flex"><p>Quantity</p>
+                <button class="btn btn-link px-2" (click)="decreaseQuantity(cart.id)">
+                  <i class="fas fa-minus"></i>
+                </button>
+
+                <input id="form1" [min]="0" name="quantity" [value]="cart.quantity" type="number"
+                  class="form-control form-control-sm" />
+
+                <button class="btn btn-link px-2" (click)="increaseQuantity(cart.id)">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                <p class="small text-muted mb-4 pb-2">Price</p>
+                <h5 class="mb-0">{{ cart.price }}</h5>
+              </div>
+              <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                <p class="small text-muted mb-4 pb-2">Action</p>
+                <button class="btn btn-danger" (click)="deleteCartItem(cart.id)">
+                  <i class="fas fa-trash fa-lg"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-end mt-4">
+          <div class="col-md-12 text-end">
+            <button class="btn btn-primary btn-lg" routerLink="/orders" (click)="checkOut()">Checkout<i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- <section class="vh-100" style="background-color: #fdccbc">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <p>
+          <span class="h2">Shopping Cart </span
+          >
+        </p>
+
+        <div class="card mb-4">
+          <div class="card-body p-4" *ngFor="let cart of carts">
+            <div class="row align-items-center">
+              <div class="col-md-2">
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/1.webp"
+                  class="img-fluid"
+                  alt="Generic placeholder image"
+                />
+              </div>
+              <div class="col-md-2 d-flex justify-content-center">
+                <div>
+                  <p class="small text-muted mb-4 pb-2">Name</p>
+                  <p class="lead fw-normal mb-0">{{ cart.title }}</p>
+                </div>
+              </div>
+              <div class="col-md-2 d-flex justify-content-center">
+                <div>
+                  <p class="small text-muted mb-4 pb-2">ID</p>
+                  <p class="lead fw-normal mb-0">{{ cart.id }}</p>
+                </div>
+              </div>
+              <div class="col-md-2 d-flex justify-content-center">
+                <div>
+                  <p class="small text-muted mb-4 pb-2">Quantity</p>
+                  <p class="lead fw-normal mb-0">{{ cart.quantity }}</p>
+                </div>
+              </div>
+              <div class="col-md-2 d-flex justify-content-center">
+                <div>
+                  <p class="small text-muted mb-4 pb-2">Price</p>
+                  <p class="lead fw-normal mb-0">{{ cart.price }}</p>
+                </div>
+              </div>
+              <div class="col-md-2 d-flex justify-content-center">
+                <div>
+                  <p class="small text-muted mb-4 pb-2" (click)="deleteCartItem(cart.id)">Action</p>
+                  <p class="lead fw-normal mb-0"><i class="fa-solid fa-trash"></i></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-5">
+          <div class="card-body p-4">
+            <div class="float-end">
+              <p class="mb-0 me-5 d-flex align-items-center">
+                <span class="small text-muted me-2">Order total:</span>
+                <span class="lead fw-normal">{{ cart.total }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary btn-lg">
+            Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- <div class="container" class="min-vh-100">
+    <div class="cart-table">
+      <div class="cart-product">
+        <div class="table table-responsive">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Product Name</th>
+              <th>Product Image</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let cart of carts">
+            <tr>
+              <td>{{ cart.id }}</td>
+              <td>{{ cart.title }}</td>
+              <td>image</td>
+              <td>{{ cart.price }}</td>
+              <td>{{ cart.quantity }}</td>
+              <td>{{ cart.Total }}</td>
+              <td>
+                <button
+                  class="btn btn-danger"
+                  (click)="deleteCartItem(cart.id)">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </div>
+      </div>
+    </div>
+  </div> -->
+

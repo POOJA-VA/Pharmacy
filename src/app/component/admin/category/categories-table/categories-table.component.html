@@ -1,0 +1,20 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categories">
+      <th scope="row">{{ category.id }}</th>
+      <td>{{ category.title }}</td>
+      <td>
+        <button class="btn btn-primary" (click)="onEdit(category)">Edit</button
+        ><button class="btn btn-success" (click)="onDelete(category.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
