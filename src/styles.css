@@ -1,23 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2&display=swap");
 
 :root {
-  --primary-50: #abdbe3;
-  --primary-100: #6db6c2;
-  --primary-300: #59afbe;
-  --primary-500: #3594a5;
-  --primary-600: #6ca6b0;
-  --primary-700: #2e6974;
-  --primary-900: #1d4c54;
-  --secondary-100: #da9cd0;
-  --secondary-500: #e3abdb;
-  --secondary-900: #cc8cc2;
-  --blue-100: #bfdde3;
-  --blue-300: #abc9cf;
-  --blue-500: #99b3b8;
-  --blue-700: #8cbac2;
-  --pink-300: #e3abdb;
-  --pink-500: #e3abdb;
-  --pink-700: #e3abdb;
+  --primary-50: #aed9e3;
+  --primary-100: #aed9e3;
+  --primary-300: #9eceda;
+  --primary-500: #8fc5d2;
+  --primary-600: #7fbccb;
+  --primary-700: #6ea6b4;
+  --primary-900: #568c99;
+  --secondary-100: #c8a1c5;
+  --secondary-500: #bb8bb8;
+  --secondary-900: #bc74b7;
+  --blue-100: #aed9e3;
+  --blue-300: #9eceda;
+  --blue-500: #8fc5d2;
+  --blue-700: #6ea6b4;
+  --pink-300: #d7a5d3;
+  --pink-500: #b581b1;
+  --pink-700: #a96ea5;
   --border-radius: 4px;
 }
 
@@ -97,10 +97,6 @@ body {
   border-right-color: var(--primary-300) !important;
 }
 
-/* background color */
-.bg-body-tertiary {
-  background-color: var(--primary-100) !important;
-}
 
 /* Custom */
 .error {
@@ -120,18 +116,18 @@ body {
 .sideBarActive > a:hover,
 .sideBarActive > a:active {
   color: var(--primary-500);
-  background-color: var(--primary-50) !important;
+  background-color:pink;
   padding: 8px;
 }
 
 .sideBarItem,
 .sideBarItem > a {
-  color: var(--primary-500);
+  color: white;
   padding: 8px;
 }
 
 .sideBarItem > a:hover {
-  color: var(--primary-500);
+  color: black;
 }
 
 .sideBarActive > .fa-solid {
@@ -140,13 +136,13 @@ body {
 
 .sideBarItem:hover {
   color: var(--primary-500);
-  background-color: var(--primary-50);
+  background-color: gray;
   padding: 8px;
 }
 
 /* Icon */
 .fa-solid {
-  color: var(--primary-300);
+  color: white;
 }
 
 .loader {

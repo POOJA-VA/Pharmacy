@@ -33,11 +33,17 @@ export class CartComponent implements OnInit {
     });
   }
 
-  deleteCartItem(cartId: number): void {
-    this.cartService.deleteCartItem(cartId).subscribe({
-      next: () => {
-        this.carts = this.carts.filter((cart) => cart.id !== cartId);
-      },
+  onDelete(id: number): void {
+    let loggedInUser = this.storageService.getLoggedInUser();
+    let userId = loggedInUser.id;
+    console.log(userId);
+    
+    this.cartService.deleteCart(userId, id).subscribe({
+      next: (cart: Cart[]) => {
+        this.carts = cart;
+        this.ngOnInit();
+        console.log(cart);
+      }
     });
   }
 

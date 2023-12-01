@@ -1,7 +1,7 @@
 export interface Cart {
     id:number;
-    title:String;
-    image?:File;
+    title:string;
+    image:File;
     price:number;
     quantity:number;
     total:number;

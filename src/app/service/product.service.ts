@@ -5,28 +5,37 @@ import { Product } from 'src/app/model/product';
 import { urlEndpoint } from 'src/app/utils/constant';
 import { AppResponse } from '../model/appResponse';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+import { Form } from '@angular/forms';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${urlEndpoint.baseUrl}/admin/medicine/all`);
+    return this.http.get<Product[]>(
+      `${urlEndpoint.baseUrl}/admin/medicine/all`
+    );
   }
-  
-  addProduct(productData: FormData): Observable<Product> {
-    return this.http.post<Product>(`${urlEndpoint.baseUrl}/admin/medicine`, productData);
+
+  addProduct(productData: FormData): Observable<AppResponse> {
+    return this.http.post<AppResponse>(
+      `${urlEndpoint.baseUrl}/pooja`,
+      productData
+    );
   }
 
   deleteProduct(id: number): Observable<AppResponse> {
-    return this.http.delete<AppResponse>(`${urlEndpoint.baseUrl}/admin/medicine/${id}`);
+    return this.http.delete<AppResponse>(
+      `${urlEndpoint.baseUrl}/admin/medicine/${id}`
+    );
   }
 
-  updateProducts(newProducts: Product): Observable<AppResponse> {
+  updateProducts(newProducts: FormData): Observable<AppResponse> {
     return this.http.put<AppResponse>(
-      `${urlEndpoint.baseUrl}/admin/medicine`, newProducts);
+      `${urlEndpoint.baseUrl}/admin/medicine`,
+      newProducts
+    );
   }
 }

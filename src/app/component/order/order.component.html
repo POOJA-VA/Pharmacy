@@ -1,97 +1,41 @@
-<div class="container mt-5">
-    <p *ngIf="orderDetails.length === 0" class="center-content">
-      Oops! There are no orders placed! <br />
-      <img
-        src="https://static.wixstatic.com/media/7742ef_dfe620d0354b471b8620fcb2c3a46e62~mv2.gif"
-      />
-      <button class="btn btn-dark mt-2" routerLink="/">Shop Here</button>
-  </p>
-  
-    <table
-      class="table table-hover shadow bg-body-tertiary rounded"
-      *ngIf="orderDetails.length !== 0"
-    >
-      <thead>
-        <tr>
-          <th scope="col">Order ID</th>
-          <th scope="col">Title</th>
-          <th scope="col">Date</th>
-          <th scope="col">Products</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Price</th>
-        </tr>
-      </thead>
-      <tbody id="cartitems" *ngFor="let item of orderDetails">
-        <tr
-          class="shadow bg-body-tertiary rounded"
-          *ngFor="let medicine of item.orderedMedicineList"
-        >
-          <td class="col">{{ item.id }}</td>
-          <td class="col">{{medicine.title}}</td>
-          <td class="col">{{ item.createdAt }}</td>
-          <td class="col">{{ medicine.title }}</td>
-          <td class="col">{{ medicine.count }}</td>
-          <td class="col">₹ {{ medicine.price*medicine.count}}</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="3"></td>
-          <td class="fw-bold">Total:</td>
-          <td class="fw-bold">₹ 5000</td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
-
-
-  <!-- <section class="h-100 gradient-custom">
-    <div class="container py-5 h-100" *ngIf="orderDetails.length === 0">
+  <section class="h-100 gradient-custom">
+    <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-10 col-xl-8">
           <div class="card" style="border-radius: 10px;">
             <div class="card-header px-4 py-5">
-              <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">Anna</span>!</h5>
+              <h5 class="text-muted mb-0">Thanks for your Order!</h5>
             </div>
-            <div class="card-body p-4" *ngIf="orderDetails.length !== 0">
-              <div class="d-flex justify-content-between align-items-center mb-4">
-                <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
-                <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p>
-              </div>
-              <div class="card shadow-0 border mb-4" *ngFor="let item of orderDetails">
-                <div class="card-body" *ngFor="let carts of item.orderedMedicineList">
-                  <div class="row">
-                    <div class="col-md-2">
-                      <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp"
-                        class="img-fluid" alt="Phone">
+            <div class="card-body p-4" *ngFor="let item of orderDetails">
+              <div class="card shadow-0 border mb-4" *ngFor="let medicine of item.orderedMedicineList">
+                <div class="card-body">
+                  <div class="row justify-content-around">
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0">ID:{{ item.id }}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0">Id:{{ item.id }}</p>
+                      <p class="text-muted mb-0 small">Title:{{ medicine.title }}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small">Title: {{carts.title}}</p>
+                      <p class="text-muted mb-0 small">Products:{{ medicine.title }}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small">Date: {{ item.createdAt }}</p>
+                      <p class="text-muted mb-0 small">Quantity:{{ medicine.count }}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small">Qty: {{ carts.count }}</p>
-                    </div>
-                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small">{{ carts.title }}</p>
+                      <p class="text-muted mb-0 small">Price:₹{{ medicine.price * medicine.count }}</p>
                     </div>
                   </div>
-                  <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
                 </div>
               </div>
             </div>
             <div class="card-footer border-0 px-4 py-5"
               style="background-color: #a8729a; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
               <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
-                paid: <span class="h2 mb-0 ms-2">Total: ₹ {{ calculateTotalPrice() }}</span></h5>
+                paid: <span class="h2 mb-0 ms-2">₹1200</span></h5>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section> -->
+  </section>

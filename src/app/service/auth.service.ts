@@ -46,8 +46,8 @@ export class AuthService {
     this.storageService.removeAuthData();
     this.isAdminSubject.next(false);
     this.isLoggedInSubject.next(false);
-    this.storageService.removeLoggedInUser();
     this.storageService.removeRoute();
+    this.storageService.removeLoggedInUser();
     this.router.navigate(["/login"], { replaceUrl: true });
   }
 

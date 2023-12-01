@@ -52,25 +52,17 @@
   </div>
 </section> -->
 
-<!-- <section class="vh-100" style="background-color: #fdccbc">
+<section class="vh-100" style="background-color: #fdccbc">
   <div class="container h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
         <p>
-          <span class="h2">Shopping Cart </span
-          >
+          <span class="h2">Shopping Cart </span>
         </p>
 
-        <div class="card mb-4">
-          <div class="card-body p-4" *ngFor="let cart of carts">
-            <div class="row align-items-center">
-              <div class="col-md-2">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/1.webp"
-                  class="img-fluid"
-                  alt="Generic placeholder image"
-                />
-              </div>
+        <div class="card mb-4 ">
+          <div class="card-body p-4 justify-content-center" *ngFor="let cart of carts">
+            <div class="row align-items-center justify-content-around">
               <div class="col-md-2 d-flex justify-content-center">
                 <div>
                   <p class="small text-muted mb-4 pb-2">Name</p>
@@ -86,7 +78,7 @@
               <div class="col-md-2 d-flex justify-content-center">
                 <div>
                   <p class="small text-muted mb-4 pb-2">Quantity</p>
-                  <p class="lead fw-normal mb-0">{{ cart.quantity }}</p>
+                  <p class="lead fw-normal mb-0">1</p>
                 </div>
               </div>
               <div class="col-md-2 d-flex justify-content-center">
@@ -97,34 +89,41 @@
               </div>
               <div class="col-md-2 d-flex justify-content-center">
                 <div>
-                  <p class="small text-muted mb-4 pb-2" (click)="deleteCartItem(cart.id)">Action</p>
-                  <p class="lead fw-normal mb-0"><i class="fa-solid fa-trash"></i></p>
+                  <p class="small text-muted mb-4 pb-2">Action</p>
+                  <button class="btn w-50" (click)="onDelete(cart.id)">
+                    <i class="fa-solid fa-trash" style="color: black;"></i>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="card mb-5">
-          <div class="card-body p-4">
-            <div class="float-end">
-              <p class="mb-0 me-5 d-flex align-items-center">
-                <span class="small text-muted me-2">Order total:</span>
-                <span class="lead fw-normal">{{ cart.total }}</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
         <div class="d-flex justify-content-end">
-          <button type="button" class="btn btn-primary btn-lg">
+          <button
+            type="button"
+            class="btn btn-primary btn-lg"
+            routerLink="/orders"
+            (click)="checkOut()"
+          >
             Checkout
           </button>
         </div>
       </div>
     </div>
   </div>
-</section> -->
+</section>
+
+<!-- 
+        <div class="card mb-5">
+          <div class="card-body p-4">
+            <div class="float-end">
+              <p class="mb-0 me-5 d-flex align-items-center">
+                <span class="small text-muted me-2">Order total:</span>
+                <span class="lead fw-normal">$250</span>
+              </p>
+            </div>
+          </div>
+        </div> -->
 
 <!-- <div class="container" class="min-vh-100">
     <div class="cart-table">
@@ -148,7 +147,7 @@
               <td>image</td>
               <td>{{ cart.price }}</td>
               <td>{{ cart.quantity }}</td>
-              <td>{{ cart.Total }}</td>
+              <td>{{ cart.total }}</td>
               <td>
                 <button
                   class="btn btn-danger"
@@ -162,4 +161,3 @@
       </div>
     </div>
   </div> -->
-

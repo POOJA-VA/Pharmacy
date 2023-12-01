@@ -12,8 +12,7 @@
     </header>
   </div> -->
 
-  
-  <!-- <template>
+<!-- <template>
     <div>
       <b-button v-b-toggle.sidebar-variant>MENU</b-button>
       <b-sidebar id="sidebar-variant" title="Sidebar" bg-variant="dark" text-variant="light" shadow>
@@ -25,23 +24,19 @@
     </div>
   </template> -->
 
-
-  <div>
+<div>
   <div *ngIf="isAdmin" class="row flex-grow-1">
-    <div class="sidebar border border-right col-2 p-0">
-      <div class="bg-body-tertiary h-100" tabindex="-1">
+    <div class="sidebar border border-right col-2 p-0" style="background-color: pink;">
+      <div class=" h-100" tabindex="-1">
         <div class="d-flex flex-column p-0 pt-3 overflow-y-auto">
           <ul class="nav flex-column">
             <li class="nav-item d-flex align-items-center px-4 sideBarItem">
               <i class="fa-solid fa-house"></i>
-              <a
-                class="nav-link d-flex align-items-center"
-                routerLink="/admin"
-              >
+              <a class="nav-link d-flex align-items-center" routerLink="/admin">
                 Dashboard
               </a>
             </li>
-            <li class="nav-item d-flex align-items-center px-4 sideBarActive">
+            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
               <i class="fa-solid fa-grip"></i>
               <a
                 class="nav-link d-flex align-items-center"
@@ -49,7 +44,7 @@
                 >Category
               </a>
             </li>
-            <li class="nav-item d-flex align-items-center px-4 sideBarActive">
+            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
               <i class="fa-solid fa-book"></i>
               <a
                 class="nav-link d-flex align-items-center"
@@ -75,9 +70,7 @@
             </li>
             <li class="nav-item d-flex align-items-center px-4 sideBarItem">
               <i class="fa-solid fa-user"></i>
-              <a
-                class="nav-link d-flex align-items-center"
-                routerLink="/login"
+              <a class="nav-link d-flex align-items-center" (click)="logout()"
                 >Log Out</a
               >
             </li>

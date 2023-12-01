@@ -19,9 +19,9 @@ export class CartService {
     return this.http.get<Cart[]>(`${urlEndpoint.baseUrl}/cart/${userId}`);
   }
 
-  deleteCartItem(cartId: number): Observable<any> {
-    return this.http.delete<any>(`${urlEndpoint.baseUrl}/cart/${cartId}`);
-  }
+  // deleteCartItem(cartId: number): Observable<any> {
+  //   return this.http.delete<any>(`${urlEndpoint.baseUrl}/cart/${cartId}`);
+  // }
 
   addItemToCart(item: any): Observable<any> {
     return this.http.post<any>(`${urlEndpoint.baseUrl}/cart`, item);
@@ -43,9 +43,9 @@ export class CartService {
     return this.http.post<Cart[]>(`${urlEndpoint.baseUrl}/cart`, requestData);
   }
 
-  deleteCart(id: number, productId: number): Observable<Cart[]> {
+  deleteCart(id: number, medicineId: number): Observable<Cart[]> {
     return this.http.delete<Cart[]>(
-      `${urlEndpoint.baseUrl}/cart/${id}/${productId}`
+      `${urlEndpoint.baseUrl}/cart/${id}/${medicineId}`
     );
   }
 }

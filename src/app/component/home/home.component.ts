@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
     private storageService: StorageService
   ) {}
 
+  
+
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
       next: (carts: any) => {
