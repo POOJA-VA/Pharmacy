@@ -25,20 +25,20 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# **Caravan and Camping Reservation System**
-
 
 **Description**
 
-    ➡️ Points
-    ➡️ Points
-    ➡️ Points 
+    ➡️ Pharmacy information system can reduce medications errors, improve patient safety, automate workflow, track costs, computerize inventory, store patient profiles. 
+    ➡️ These systems can keep track of medications, which is important when administering controlled substances.
+    ➡️ A pharmacy information system (PIS) is a software system that records, manages, and stores patient data.
 
 
 **Credentials**
 
-    👉 Role 
-        📧Email = "a" | 🔐Password = "a"
+    👉 Admin
+        📧Email = "admin" | 🔐Password = "admin"
+    👉 user 
+        📧Email = "user" | 🔐Password = "user"
 
 
 **Technologies used**
