@@ -52,5 +52,5 @@
 
 Demo Video Url
   
-    🔗 url for demo video - 
+    🔗 url for demo video - https://drive.google.com/file/d/1Lq6OwAXfUU-_MP05n_Ho6vIf325pMtZ3/view?usp=drive_link
   
