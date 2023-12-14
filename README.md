@@ -49,8 +49,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 **Screenshots**
-
-    🔗 Links
+ 🔗![Screenshot 2023-12-13 113314](https://github.com/POOJA-VA/Pharmacy/assets/145538393/dac4939c-1710-4a03-bf99-459663da39e9)
+ 🔗![Screenshot 2023-12-13 113331](https://github.com/POOJA-VA/Pharmacy/assets/145538393/63e746d0-4cf9-4b55-b635-827fc53fd7a6)
+ 🔗![Screenshot 2023-12-14 123506](https://github.com/POOJA-VA/Pharmacy/assets/145538393/2de6dc75-86f4-4bd8-8cf8-5f346da6d749)
+ 🔗![Screenshot 2023-12-14 123814](https://github.com/POOJA-VA/Pharmacy/assets/145538393/3e37ae12-baf4-485e-bcc7-01a0775b8a57)
 
 
 **Challenges**
