@@ -73,12 +73,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 **Repository Link**
 
-    🔗 Front End - Back End - https://github.com/POOJA-VA/Pharmacy_Management
+    🔗 Front End -https://github.com/POOJA-VA/Pharmacy Back End - https://github.com/POOJA-VA/Pharmacy_Management
 
 
 **MySQL Schema**
-
-    👉 Image of schema 
+![Screenshot 2023-12-14 122434](https://github.com/POOJA-VA/Pharmacy/assets/145538393/05a412c1-fa38-4cb8-b1af-c4148291b76b)
 
 
 Demo Video Url
