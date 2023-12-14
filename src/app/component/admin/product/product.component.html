@@ -6,6 +6,7 @@
     class="btn btn-primary"
     data-bs-toggle="modal"
     data-bs-target="#staticBackdrop"
+    style="color: black; background-color: plum;"
     >Add Products</a
   >
 </section>
@@ -98,6 +99,7 @@
                         #productForm="ngForm"
                         (ngSubmit)="onSubmit(productForm)"
                       >
+                      <input type="hidden" name="productId" ngModel [(ngModel)]="productId">
                         <div class="mb-3">
                           <label for="medicineId" class="form-label">Medicine ID</label>
                           <!-- <input type="hidden" class="form-control" id="medicineId" placeholder="Medicine ID" name="id" [(ngModel)]="id"> -->

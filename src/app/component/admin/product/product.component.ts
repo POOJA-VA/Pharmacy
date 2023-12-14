@@ -21,6 +21,7 @@ export class AdminProductComponent implements OnInit {
   photo: string = '';
   medicines: Product[] = [];
   file = '';
+  productId: number = 0;
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
@@ -39,6 +40,7 @@ export class AdminProductComponent implements OnInit {
     console.log(form.value);
     let formValue: Product = form.value;
     const formData = new FormData();
+    formData.append('id', form.value.productId);
     formData.append('photo', this.file);
     formData.append('categoryId', '1');
     formData.append('title', formValue.title);
@@ -53,6 +55,7 @@ export class AdminProductComponent implements OnInit {
         this.title = '';
         this.description = '';
         this.price = 0;
+        this.ngOnInit();
       },
       error: (err) => {
         let message: string = err?.error?.error?.message;
@@ -96,6 +99,7 @@ export class AdminProductComponent implements OnInit {
   }
 
   onEdit(id: number) {
+    this.productId = id;
     this.btn = 'Edit';
     this.id = id;
     this.editId = -1;

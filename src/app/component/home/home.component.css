@@ -1131,3 +1131,7 @@ body {
     .anchor_remove{
       text-decoration: none;
     }
+
+    .btn{
+      background-color: rgb(101, 201, 229);
+    }

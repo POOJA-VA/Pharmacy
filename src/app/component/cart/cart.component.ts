@@ -1,5 +1,6 @@
 import { Component, OnInit, numberAttribute } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppUser } from 'src/app/model/appUser';
 import { Cart } from 'src/app/model/cart';
 import { Order } from 'src/app/model/order';
 import { CartService } from 'src/app/service/cart.service';
@@ -13,6 +14,17 @@ import { StorageService } from 'src/app/service/storage.service';
 })
 export class CartComponent implements OnInit {
   carts: Cart[] = [];
+  totalValue: number = 0;
+  total: number = 0;
+  selectedItem: string = '';
+  user: AppUser={
+    id:0,
+    username: '',
+    password: '',
+    role:''
+  };
+
+  itemCount: number = 1;
 
   constructor(
     private cartService: CartService,
@@ -62,19 +74,34 @@ export class CartComponent implements OnInit {
     });
   }
 
-  decreaseQuantity(cartId: number): void {
-    const cartToUpdate = this.carts.find((cart) => cart.id === cartId);
-    if (cartToUpdate && cartToUpdate.quantity > 0) {
-      cartToUpdate.quantity--;
-      this.updateCartItem(cartToUpdate);
-    }
-  }
+  // decreaseQuantity(cartId: number): void {
+  //   const cartToUpdate = this.carts.find((cart) => cart.id === cartId);
+  //   if (cartToUpdate && cartToUpdate.quantity > 0) {
+  //     cartToUpdate.quantity--;
+  //     this.updateCartItem(cartToUpdate);
+  //   }
+  // }
 
-  increaseQuantity(cartId: number): void {
-    const cartToUpdate = this.carts.find((cart) => cart.id === cartId);
-    if (cartToUpdate) {
-      cartToUpdate.quantity++;
-      this.updateCartItem(cartToUpdate);
+  // increaseQuantity(cartId: number): void {
+  //   const cartToUpdate = this.carts.find((cart) => cart.id === cartId);
+  //   if (cartToUpdate) {
+  //     cartToUpdate.quantity++;
+  //     this.updateCartItem(cartToUpdate);
+  //   }
+  // }
+
+  increamentCount(cart: Cart) {
+      cart.count += 1;
+      this.cartService
+        .cartCountUpdate(this.user.id, cart.medicineId, cart.count, this.total)
+        .subscribe((response) => console.log(response));
+  }
+  decrementCount(cart: Cart) {
+    if (cart.count != 1) {
+      cart.count -= 1;
+      this.cartService
+        .cartCountUpdate(this.user.id, cart.medicineId, cart.count, this.total)
+        .subscribe((response) => console.log(response));
     }
   }
 
@@ -91,6 +118,13 @@ export class CartComponent implements OnInit {
         });
       },
     });
+  }
+
+  calculateTotalValue(): void {
+    this.totalValue = this.carts.reduce(
+      (acc, cart) => acc + cart.count * cart.price,
+      0
+    );
   }
 
   cartItem: Cart[] = this.storageService.getCart()!;

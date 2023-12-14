@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { urlEndpoint } from '../utils/constant';
 import { Observable } from 'rxjs';
 import { Order } from '../model/order';
+import { Orderstatus } from '../model/orderstatus';
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +25,11 @@ export class OrderService {
       addressId:addressId
     }
     return this.http.post<Order[]>(`${urlEndpoint.baseUrl}/order`,orderdata)
+  }
+
+  getorderStatus(): Observable<Orderstatus[]> {
+    return this.http.get<Orderstatus[]>(
+      `${urlEndpoint.baseUrl}/admin/order/status`
+    );
   }
 }

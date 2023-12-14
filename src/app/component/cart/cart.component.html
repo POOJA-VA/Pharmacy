@@ -53,15 +53,18 @@
 </section> -->
 
 <section class="vh-100" style="background-color: #fdccbc">
-  <div class="container h-100">
+  <div class="container h-100" *ngIf="carts.length !== 0">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
         <p>
           <span class="h2">Shopping Cart </span>
         </p>
 
-        <div class="card mb-4 ">
-          <div class="card-body p-4 justify-content-center" *ngFor="let cart of carts">
+        <div class="card mb-4">
+          <div
+            class="card-body p-4 justify-content-center"
+            *ngFor="let cart of carts"
+          >
             <div class="row align-items-center justify-content-around">
               <div class="col-md-2 d-flex justify-content-center">
                 <div>
@@ -78,26 +81,161 @@
               <div class="col-md-2 d-flex justify-content-center">
                 <div>
                   <p class="small text-muted mb-4 pb-2">Quantity</p>
-                  <p class="lead fw-normal mb-0">1</p>
+                  <button
+                    class="btn"
+                    style="width: 10px; margin-bottom: 12px"
+                    (click)="decrementCount(cart)"
+                  >
+                    <i class="fa fa-minus"></i>
+                  </button>
+                  <span class="mx-2 my-0" style="margin-bottom: 12px">
+                    {{ cart.count == null ? 1 : cart.count }}</span
+                  >
+                  <button
+                    class="btn mx-0"
+                    style="width: 10px; margin-bottom: 12px"
+                    (click)="increamentCount(cart)"
+                  >
+                    <i class="fa fa-plus"></i>
+                  </button>
                 </div>
               </div>
               <div class="col-md-2 d-flex justify-content-center">
                 <div>
                   <p class="small text-muted mb-4 pb-2">Price</p>
-                  <p class="lead fw-normal mb-0">{{ cart.price }}</p>
+                  <p class="lead fw-normal mb-0">
+                    ₹
+                    {{
+                      cart.count == null
+                        ? cart.price
+                        : total + cart.price * cart.count
+                    }}
+                  </p>
                 </div>
               </div>
               <div class="col-md-2 d-flex justify-content-center">
                 <div>
                   <p class="small text-muted mb-4 pb-2">Action</p>
                   <button class="btn w-50" (click)="onDelete(cart.id)">
-                    <i class="fa-solid fa-trash" style="color: black;"></i>
+                    <i class="fa-solid fa-trash" style="color: black"></i>
                   </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- ==============================================
+	    Credit Card Payment Section
+	    =============================================== -->
+        <section class="credit-card">
+          <div class="container">
+            <div class="card-holder">
+              <div class="card-box bg-news">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <div class="img-box">
+                      <img
+                        src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                        class="img-fluid"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <form>
+                      <div class="card-details">
+                        <h3 class="title">Credit Card Details</h3>
+                        <div class="row">
+                          <div class="form-group col-sm-7">
+                            <div class="inner-addon right-addon">
+                              <label for="card-holder">Card Holder</label>
+                              <i class="far fa-user"></i>
+                              <input
+                                id="card-holder"
+                                type="text"
+                                class="form-control"
+                                placeholder="Card Holder"
+                                aria-label="Card Holder"
+                                aria-describedby="basic-addon1"
+                              />
+                            </div>
+                          </div>
+                          <div class="form-group col-sm-5">
+                            <label for="">Expiration Date</label>
+                            <div class="input-group expiration-date">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="MM"
+                                aria-label="MM"
+                                aria-describedby="basic-addon1"
+                              />
+                              <span class="date-separator">/</span>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="YY"
+                                aria-label="YY"
+                                aria-describedby="basic-addon1"
+                              />
+                            </div>
+                          </div>
+                          <div class="form-group col-sm-8">
+                            <div class="inner-addon right-addon">
+                              <label for="card-number">Card Number</label>
+                              <i class="far fa-credit-card"></i>
+                              <input
+                                id="card-number"
+                                type="text"
+                                class="form-control"
+                                placeholder="Card Number"
+                                aria-label="Card Holder"
+                                aria-describedby="basic-addon1"
+                              />
+                            </div>
+                          </div>
+                          <div class="form-group col-sm-4">
+                            <label for="cvc">CVC</label>
+                            <input
+                              id="cvc"
+                              type="text"
+                              class="form-control"
+                              placeholder="CVC"
+                              aria-label="Card Holder"
+                              aria-describedby="basic-addon1"
+                            />
+                          </div>
+                          <div class="form-group col-sm-12">
+                            <button
+                              type="button"
+                              class="btn btn-primary btn-block"
+                            >
+                              Proceed
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!--/col-lg-6 -->
+                  <div class="col-lg-1 pt-5">
+                    <div class="text-end">
+                      <p>Subtotal:₹{{ totalValue }}</p>
+                      <!-- {{ total + cart.price * cart.count }} -->
+                      <p>Shipping:₹40</p>
+                      <h3>Total:₹{{ totalValue + 40 }}</h3>
+                    </div>
+                  </div>
+                </div>
+                <!--/row -->
+              </div>
+              <!--/card-box -->
+            </div>
+            <!--/card-holder -->
+          </div>
+          <!--/container -->
+        </section>
+
         <div class="d-flex justify-content-end">
           <button
             type="button"
@@ -112,52 +250,3 @@
     </div>
   </div>
 </section>
-
-<!-- 
-        <div class="card mb-5">
-          <div class="card-body p-4">
-            <div class="float-end">
-              <p class="mb-0 me-5 d-flex align-items-center">
-                <span class="small text-muted me-2">Order total:</span>
-                <span class="lead fw-normal">$250</span>
-              </p>
-            </div>
-          </div>
-        </div> -->
-
-<!-- <div class="container" class="min-vh-100">
-    <div class="cart-table">
-      <div class="cart-product">
-        <div class="table table-responsive">
-          <thead>
-            <tr>
-              <th>S.No</th>
-              <th>Product Name</th>
-              <th>Product Image</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let cart of carts">
-            <tr>
-              <td>{{ cart.id }}</td>
-              <td>{{ cart.title }}</td>
-              <td>image</td>
-              <td>{{ cart.price }}</td>
-              <td>{{ cart.quantity }}</td>
-              <td>{{ cart.total }}</td>
-              <td>
-                <button
-                  class="btn btn-danger"
-                  (click)="deleteCartItem(cart.id)">
-                  <i class="fas fa-trash-alt"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </div>
-      </div>
-    </div>
-  </div> -->

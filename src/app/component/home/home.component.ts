@@ -26,8 +26,6 @@ export class HomeComponent implements OnInit {
     private storageService: StorageService
   ) {}
 
-  
-
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
       next: (carts: any) => {
@@ -78,4 +76,9 @@ export class HomeComponent implements OnInit {
     });
     this.ngOnInit();
   }
+
+  // getcount(): number{
+  //   let count=this.cartService.getCount();
+  //   return count ? count:0;
+  // }
 }

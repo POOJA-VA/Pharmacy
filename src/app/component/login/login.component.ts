@@ -1,9 +1,7 @@
 import { Component } from "@angular/core";
-import { Form, NgForm } from "@angular/forms";
-import { AnimationOptions } from "ngx-lottie";
+import { NgForm } from "@angular/forms";
 import { AppResponse } from "src/app/model/appResponse";
 import { Login } from "src/app/model/login";
-import { AppUser } from "src/app/model/appUser";
 import { AuthService } from "src/app/service/auth.service";
 
 @Component({
@@ -12,10 +10,6 @@ import { AuthService } from "src/app/service/auth.service";
   styleUrls: ["./login.component.css"],
 })
 export class LoginComponent {
-  options: AnimationOptions = {
-    path: "/assets/auth.json",
-  };
-
   username: String = "";
   password: String = "";
   error: String = "";

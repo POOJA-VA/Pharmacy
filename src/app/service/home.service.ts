@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { urlEndpoint } from '../utils/constant';
 import { AppResponse } from '../model/appResponse';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HomeService {
   error: String = '';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getAllMedicine(): void {
     this.http.get<AppResponse>(`${urlEndpoint.baseUrl}/medicine/all`).subscribe({
@@ -23,4 +24,19 @@ export class HomeService {
       },
     });
   }
+
+  // getCount(): number {
+  //   let loggedInUser: User = this.authService.getLoggedInUser();
+  //   let userCart: Cart | undefined = this.cart.find(
+  //     (c) => c.user.id === loggedInUser.id);
+  //   let count: number = 0;
+  //   if (userCart) {
+  //     for (let product of userCart.cart) {
+  //       if (product.count) {
+  //         count += product.count;
+  //       }
+  //     }
+  //   }
+  //   return count;
+  // }
 }

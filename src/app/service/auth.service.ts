@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { CONSTANT, urlEndpoint } from "../utils/constant";
 import { Login } from "../model/login";
-import { BehaviorSubject, Observable, Observer, map } from "rxjs";
+import { BehaviorSubject, Observable, map } from "rxjs";
 import { AppResponse } from "../model/appResponse";
 import { StorageService } from "./storage.service";
 import { AppUser } from "../model/appUser";

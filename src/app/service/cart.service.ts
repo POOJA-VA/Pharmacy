@@ -48,4 +48,19 @@ export class CartService {
       `${urlEndpoint.baseUrl}/cart/${id}/${medicineId}`
     );
   }
+
+  cartCountUpdate(
+    userId: number,
+    productId: number,
+    count: number,
+    t: number
+  ): Observable<Cart[]> {
+    const requestData = {
+      userId: userId,
+      medicineId: productId,
+      count: count,
+      total: t,
+    };
+    return this.http.put<Cart[]>(`${urlEndpoint.baseUrl}/cart`, requestData);
+  }
 }
