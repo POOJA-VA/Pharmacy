@@ -6,7 +6,7 @@
     class="btn btn-primary"
     data-bs-toggle="modal"
     data-bs-target="#staticBackdrop"
-    style="color: black; background-color: plum;"
+    style="color: black; background-color: plum"
     >Add Products</a
   >
 </section>
@@ -25,7 +25,7 @@
             <h5 class="card-title">Title:{{ medicine.title }}</h5>
             <p class="card-text">ID: {{ medicine.id }}</p>
             <p class="card-text">Description: {{ medicine.description }}</p>
-            <p class="card-text">Price: {{ medicine.price }}</p>
+            <p class="card-text">Price: ₹{{ medicine.price }}</p>
             <p class="card-text">Date: {{ medicine.date }}</p>
             <p class="card-text">Expiry Date: {{ medicine.expirydate }}</p>
             <button
@@ -99,10 +99,16 @@
                         #productForm="ngForm"
                         (ngSubmit)="onSubmit(productForm)"
                       >
-                      <input type="hidden" name="productId" ngModel [(ngModel)]="productId">
+                        <input
+                          type="hidden"
+                          name="productId"
+                          ngModel
+                          [(ngModel)]="productId"
+                        />
                         <div class="mb-3">
-                          <label for="medicineId" class="form-label">Medicine ID</label>
-                          <!-- <input type="hidden" class="form-control" id="medicineId" placeholder="Medicine ID" name="id" [(ngModel)]="id"> -->
+                          <label for="medicineId" class="form-label"
+                            >Medicine ID</label
+                          >
                         </div>
                         <div class="mb-3">
                           <label for="medicineTitle" class="form-label"
@@ -128,8 +134,13 @@
                             id="title"
                             placeholder="Medicine Title"
                             name="title"
-                            [(ngModel)]="title"ngModel
+                            [(ngModel)]="title"
+                            minlength="4"
+                            required
                           />
+                          <div *ngIf="productForm.controls['title']">
+                            Title should have at least 4 characters.
+                          </div>
                         </div>
                         <div class="mb-3">
                           <label for="medicineDescription" class="form-label"
@@ -141,8 +152,15 @@
                             rows="3"
                             placeholder="Medicine Description"
                             name="description"
-                            [(ngModel)]="description"ngModel
+                            [(ngModel)]="description"
+                            minlength="8"
+                            required
                           ></textarea>
+                          <div
+                            *ngIf="productForm.controls['description'].errors"
+                          >
+                            Description should have atleast 8 characters.
+                          </div>
                         </div>
                         <div class="mb-3">
                           <label for="medicinePrice" class="form-label"
@@ -154,8 +172,17 @@
                             id="medicinePrice"
                             placeholder="Medicine Price"
                             name="price"
-                            [(ngModel)]="price"ngModel
+                            [(ngModel)]="price"
+                            pattern="^\d+(\.\d{1,2})?$"
+                            required
                           />
+                            <div
+                              *ngIf="
+                                productForm.controls['price']
+                              "
+                            >
+                              Price must be in numbers.
+                            </div>
                         </div>
                         <div class="mb-3">
                           <label for="medicineDate" class="form-label"
@@ -166,7 +193,8 @@
                             class="form-control"
                             id="medicineDate"
                             name="date"
-                            [(ngModel)]="date"ngModel
+                            [(ngModel)]="date"
+                            ngModel
                           />
                         </div>
                         <div class="mb-3">
@@ -178,7 +206,8 @@
                             class="form-control"
                             id="medicineExpiryDate"
                             name="expirydate"
-                            [(ngModel)]="expirydate"ngModel
+                            [(ngModel)]="expirydate"
+                            ngModel
                           />
                         </div>
                       </form>

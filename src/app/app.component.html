@@ -1,33 +1,75 @@
 <div *ngIf="!isLoggedIn">
-  <router-outlet></router-outlet>
+  <router-outlet/>
 </div>
 
-<!-- <div *ngIf="isLoggedIn" class="container-fluid vh-100 d-flex flex-column">
-  <div class="row">
-    <header class="navbar sticky-top bg-primary p-2 shadow">
-      <a class="navbar-brand px-3 text-white" routerLink="/">Shopping</a>
-      <div class="navbar-nav px-4 text-black" (click)="logout()" role="button">
-        <i class="fa-solid fa-solid fa-right-from-bracket text-black"></i>
+  <!-- navbar started -->
+<div class="site-wrap fixed-top" *ngIf="!isAdmin && isLoggedIn">
+  <div class="site-navbar py-2">
+    <div class="search-wrap">
+      <div class="container">
+        <a href="#" class="search-close js-search-close"
+          ><span class="icon-close2"></span
+        ></a>
       </div>
-    </header>
-  </div> -->
-
-<!-- <template>
-    <div>
-      <b-button v-b-toggle.sidebar-variant>MENU</b-button>
-      <b-sidebar id="sidebar-variant" title="Sidebar" bg-variant="dark" text-variant="light" shadow>
-        <div class="px-3 py-2">
-            ////
-          <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
-        </div>
-      </b-sidebar>
     </div>
-  </template> -->
+
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="logo">
+          <div class="site-logo">
+            <a href="index.html" class="js-logo-clone">Pharma</a>
+          </div>
+        </div>
+        <div class="main-nav d-none d-lg-block">
+          <nav
+            class="site-navigation text-right text-md-center"
+            role="navigation"
+          >
+            <ul class="site-menu js-clone-nav d-none d-lg-block">
+              <li ><a routerLink="/" *ngIf="!isAdmin">Home</a></li>
+              <li><a routerLink="/cart" *ngIf="!isAdmin">Cart</a></li>
+              <li><a routerLink="/orders" *ngIf="!isAdmin">Orders</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="icons">
+          <a routerLink="/profile">
+            <i class="fas fa-user"></i>
+          </a>
+          <a routerLink="/cart" class="icons-btn d-inline-block bag">
+            <span class="icon-shopping-bag"
+              ><i class="fa fa-cart-shopping"></i
+            ></span>
+            <span class="number">0</span>
+            <!-- {{ getcount() > 0 ? getcount() : "" }} -->
+          </a>
+          <a
+            href="#"
+            class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"
+            ><span class="icon-menu"></span
+          ></a>
+          <a routerLink="/login"
+            ><div class="icons-btn d-inline-block" role="button"></div>
+            <i class="fa-solid fa-solid fa-right-from-bracket text-black" (click)="logout()"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- navbar ended -->
+
+
+
 
 <div>
   <div *ngIf="isAdmin" class="row flex-grow-1">
-    <div class="sidebar border border-right col-2 p-0" style="background-color: pink;">
-      <div class=" h-100" tabindex="-1">
+    <div
+      class="sidebar border border-right col-2 p-0"
+      style="background-color: pink"
+    >
+      <div class="h-100" tabindex="-1">
         <div class="d-flex flex-column p-0 pt-3 overflow-y-auto">
           <ul class="nav flex-column">
             <li class="nav-item d-flex align-items-center px-4 sideBarItem">
@@ -86,7 +128,7 @@
     <router-outlet></router-outlet>
   </div>
 
-  <div *ngIf="loaderService.isLoading | async" class="loader">
+  <!-- <div *ngIf="loaderService.isLoading | async" class="loader">
     <ng-lottie [options]="options"></ng-lottie>
-  </div>
+  </div> -->
 </div>

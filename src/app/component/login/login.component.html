@@ -1,4 +1,4 @@
-<div class="wrapper" style="background-image: url('https://matsuniversity.ac.in/wp-content/uploads/2023/03/pharmacy.jpg'); background-size: cover; background-position: center; padding-top: 20px;">
+<div class="wrapper" style="background-image: url('https://wallpapercave.com/wp/wp8167079.jpg'); background-size: cover; background-position: center; padding: 100px;">
   <nav class="nav">
     <div class="nav-logo">
       <p>Pharma</p>
@@ -19,6 +19,7 @@
         <span>Don't have an account? <a routerLink="/register">Sign Up</a></span>
         <header>Login</header>
         <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+          <!-- Username input -->
           <div class="input-box" style="margin-bottom: 20px;">
             <input
               type="text"
@@ -26,9 +27,17 @@
               name="username"
               placeholder="Username or Email"
               [(ngModel)]="username"
+              required
+              minlength="4"
+              #modelUsername="ngModel"
+              [ngClass]="(modelUsername.invalid && modelUsername.touched) ? 'is-invalid' : ''"
             />
             <i class="bx bx-user"></i>
+            <div *ngIf="modelUsername.invalid && modelUsername.touched" class="invalid-feedback">
+              Username does not match the valid characters.
+            </div>
           </div>
+          <!-- Password input -->
           <div class="input-box" style="margin-bottom: 20px;">
             <input
               type="password"
@@ -36,15 +45,23 @@
               name="password"
               placeholder="Password"
               [(ngModel)]="password"
+              required
+              minlength="4"
+              #modelPassword="ngModel"
+              [ngClass]="(modelPassword.invalid && modelPassword.touched) ? 'is-invalid' : ''"
             />
             <i class="bx bx-lock-alt"></i>
+            <div *ngIf="modelPassword.invalid && modelPassword.touched" class="invalid-feedback">
+              Password does not match the valid requirements. 
+            </div>
           </div>
+          <!-- Submit button -->
           <div class="input-box">
-            <input type="submit" class="submit" value="Login" />
+            <button type="submit" class="submit" [disabled]="loginForm.invalid">Login</button>
           </div>
         </form>
       </div>
-      <!-- Login Ended -->
     </div>
   </div>
-</div>
+      <!-- Login Ended -->
+    </div>

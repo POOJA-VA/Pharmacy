@@ -28,7 +28,7 @@ export class RegisterComponent {
     registerForm.resetForm();
   }
  
-  register(_registerForm: Form): void {
+  register(registerForm: Form): void {
     let user: Register = {
       name: this.user.name,
       password: this.user.password,
@@ -36,16 +36,7 @@ export class RegisterComponent {
     };
  
     this.authService.register(user).subscribe({
-      next: (_response: AppResponse) => {},
-      error: (err: { error: { error: { message: string } } }) => {
-        console.log(err);
-        let message: string = err.error.error.message;
-        this.error = message.includes(',') ? message.split(',')[0] : message;
-      },
-      complete: () => {
-        console.log('There are no more action happen.'),
-          this.router.navigate(['/login'], { replaceUrl: true });
-      },
+      next: (response: AppResponse) => {},
     });
   }
 }

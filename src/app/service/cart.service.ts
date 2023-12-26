@@ -13,7 +13,12 @@ import { AppUser } from '../model/appUser';
   providedIn: 'root',
 })
 export class CartService {
-  constructor(private http: HttpClient,private authService: AuthService,private productService: ProductService, private storageService: StorageService) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private productService: ProductService,
+    private storageService: StorageService
+  ) {}
 
   fetchCart(userId: number): Observable<Cart[]> {
     return this.http.get<Cart[]>(`${urlEndpoint.baseUrl}/cart/${userId}`);
@@ -26,12 +31,12 @@ export class CartService {
   addItemToCart(item: any): Observable<any> {
     return this.http.post<any>(`${urlEndpoint.baseUrl}/cart`, item);
   }
-  
+
   updateCartItem(cart: Cart): Observable<any> {
     return this.http.put<any>(`${urlEndpoint.baseUrl}/cart/${cart.id}`, cart);
   }
 
-    addToCart(userId: number, productId: number): Observable<Cart[]> {
+  addToCart(userId: number, productId: number): Observable<Cart[]> {
     let count: number = 1;
     const requestData = {
       userId: userId,
@@ -39,7 +44,6 @@ export class CartService {
       count: count,
     };
     console.log(requestData);
-
     return this.http.post<Cart[]>(`${urlEndpoint.baseUrl}/cart`, requestData);
   }
 

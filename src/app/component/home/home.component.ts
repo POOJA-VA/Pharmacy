@@ -12,6 +12,7 @@ import { StorageService } from 'src/app/service/storage.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  cartItem: number = 0;
   products: Product[] = [];
   carts: Cart[] = [];
   user: AppUser = this.storageService.getLoggedInUser();
@@ -52,7 +53,6 @@ export class HomeComponent implements OnInit {
       .addToCart(this.storageService.getLoggedInUser()?.id, productId)
       .subscribe(
         (Response) => console.log(Response),
-        () => console.log('product does not added in cart')
       );
   }
 
@@ -76,9 +76,4 @@ export class HomeComponent implements OnInit {
     });
     this.ngOnInit();
   }
-
-  // getcount(): number{
-  //   let count=this.cartService.getCount();
-  //   return count ? count:0;
-  // }
 }

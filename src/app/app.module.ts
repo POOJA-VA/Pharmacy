@@ -8,8 +8,6 @@ import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import player from 'lottie-web';
-import { LottieModule } from 'ngx-lottie';
 import { AdminHomeComponent } from './component/admin/home/home.component';
 import { LoaderInterceptorService } from './service/interceptor/loaderInterceptor.service';
 import { AuthInterceptorService } from './service/interceptor/authInterceptor.service';
@@ -21,10 +19,9 @@ import { CommonModule } from '@angular/common';
 import { AdminProductComponent } from './component/admin/product/product.component';
 import { AdminOrderComponent } from './component/admin/order/order.component';
 import { OrderComponent } from './component/order/order.component';
+import { ProfileComponent } from './component/profile/profile.component';
+import { ToastrModule } from 'ngx-toastr';
 
-export function playerFactory() {
-  return player;
-}
 
 @NgModule({
   declarations: [
@@ -39,6 +36,7 @@ export function playerFactory() {
     AdminUserComponent,
     RegisterComponent,
     OrderComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +45,12 @@ export function playerFactory() {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    LottieModule.forRoot({ player: playerFactory }),
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      closeButton: true,
+      progressBar: true,
+      timeOut: 5000,
+    })
   ],
   providers: [
     {

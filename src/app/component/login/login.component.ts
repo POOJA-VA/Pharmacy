@@ -1,9 +1,11 @@
 import { Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
+import { ToastrService } from "ngx-toastr";
 import { AppResponse } from "src/app/model/appResponse";
 import { Login } from "src/app/model/login";
 import { AuthService } from "src/app/service/auth.service";
-
+import { ToasterServiceService } from "src/app/service/toaster-service.service";
+import { ToasterService } from "src/app/service/toaster.service";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -14,18 +16,19 @@ export class LoginComponent {
   password: String = "";
   error: String = "";
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private toaster:ToastrService) {}
 
-  login(_loginForm: NgForm): void {
+  login(loginForm: NgForm): void {
     let login: Login = {
       username: this.username,
       password: this.password,
     };
-    console.log(_loginForm.value);
+    console.log(loginForm.value);
     
-    this.authService.login(_loginForm.value).subscribe({
+    this.authService.login(loginForm.value).subscribe({
       next: (response: AppResponse) => {
         this.authService.setLoggedIn(response.data);
+        this.toaster.success("Login Successfully");
       },
       error: (err) => {
         let message: String = err.error.error.message;

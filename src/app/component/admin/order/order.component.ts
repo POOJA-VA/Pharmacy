@@ -6,20 +6,19 @@ import { OrderService } from 'src/app/service/order.service';
 @Component({
   selector: 'app-admin-order',
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.css']
+  styleUrls: ['./order.component.css'],
 })
 export class AdminOrderComponent {
   orderDetails: Order[] = [];
   orderStatus: Orderstatus[] = [];
 
-  constructor(private orderService:OrderService){}
+  constructor(private orderService: OrderService) {}
   ngOnInit(): void {
     this.orderService.getAllOrderDetails().subscribe({
       next: (order: any) => {
-        let orderDetail:Order[] = order.data;
+        let orderDetail: Order[] = order.data;
         console.log(order);
-
-        this.orderDetails = orderDetail
+        this.orderDetails = orderDetail;
       },
 
       error: () => console.log('error'),
@@ -27,7 +26,7 @@ export class AdminOrderComponent {
     });
 
     this.orderService
-    .getorderStatus()
-    .subscribe((response) => console.log('status', response));
-}
+      .getorderStatus()
+      .subscribe((response) => console.log('status', response));
   }
+}

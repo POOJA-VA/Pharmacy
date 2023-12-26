@@ -24,6 +24,10 @@ export class HomeService {
       },
     });
   }
+  
+  // deleteAddress(deleteId: number): Observable<Address> {
+  //   return this.http.delete<Address>(`${urlEndpoint.baseUrl}/user/${deleteId}`);
+  // }
 
   // getCount(): number {
   //   let loggedInUser: User = this.authService.getLoggedInUser();

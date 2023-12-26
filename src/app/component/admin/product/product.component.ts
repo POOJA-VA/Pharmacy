@@ -62,6 +62,7 @@ export class AdminProductComponent implements OnInit {
         this.error = message.includes(',') ? message.split(',')[0] : message;
       },
     });
+  }
     // }
     //  else {
     //   console.log('ekskkdjm');
@@ -96,7 +97,6 @@ export class AdminProductComponent implements OnInit {
     //     },
     //   });
     // }
-  }
 
   onEdit(id: number) {
     this.productId = id;

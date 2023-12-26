@@ -32,8 +32,6 @@ export class CategoryComponent implements OnInit{
   onSubmit(form: any) {
     console.log(form.value);
     console.log(this.categoryModel);
-  
-
     if (this.categoryModel.id === 0) {
       this.categoryService
         .postCategory({ title: this.categoryModel.title })

@@ -7,4 +7,4 @@ export interface UserDetail {
   roles: string;
   joinedAt: string;
   addressList: Address[];
-}
+  }

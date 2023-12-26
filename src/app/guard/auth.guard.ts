@@ -4,13 +4,13 @@ import { AuthService } from "../service/auth.service";
 import { StorageService } from "../service/storage.service";
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const storageService = inject(StorageService);
+  // const storageService = inject(StorageService);
   const loginService = inject(AuthService);
   const router = inject(Router);
 
-  storageService.setRoute(
-    route.routeConfig?.path !== undefined ? route.routeConfig.path : null
-  );
+  // storageService.setRoute(
+  //   route.routeConfig?.path !== undefined ? route.routeConfig.path : null
+  // );
 
   if (!loginService.isLoggedIn()) {
     router.navigate(["/login"], { replaceUrl: true });

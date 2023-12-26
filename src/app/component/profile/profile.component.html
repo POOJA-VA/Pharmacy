@@ -1,0 +1,36 @@
+<section class="h-100 h-custom" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-6">
+          <div class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
+            <div class="card-body p-5">
+              <div *ngFor="let detail of profileDetails">
+                <h5 class="fw-bold mb-2" style="color: #f37a27;">User Details</h5>
+                <p>Address:{{detail.address}}</p>
+                <p>City:{{detail.city}}</p>
+                <p>Pincode:{{detail.zipcode}}</p>
+                <button class="btn btn-outline-danger justify-content-md-end" type="submit" (click)="deleteAddress(detail.id)"><i class="fa fa-folder-minus"></i> Delete</button>
+              </div>
+              <div class="mb-3">
+                <h5 class="fw-bold mb-2" style="color: #f37a27;">Address Details</h5>
+                <p>Username:{{username}}</p>
+                <p>Role:{{role}}</p>
+                <label for="exampleInputEmail1" class="form-label">Address</label>
+                <input type="email" class="form-control" placeholder="enter your address">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">City</label>
+                <input type="email" class="form-control" placeholder="enter your city">
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Pincode</label>
+                <input type="email" class="form-control" placeholder="enter your pincode">
+              </div>
+              <button class="btn btn-outline-primary"  type="submit"><i class="fa fa-address-card"></i> Add</button>
+              <button class="btn btn-outline-success" type="submit"><i class="fa fa-user-pen"></i> Edit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

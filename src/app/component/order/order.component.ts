@@ -43,12 +43,4 @@ export class OrderComponent implements OnInit {
       complete: () => console.log('completed'),
     });
   }
-
-  calculateTotalPrice(): number {
-    let totalPrice = 0;
-    for (const cart of this.carts) {
-      totalPrice += cart.price * cart.count;
-    }
-    return totalPrice;
-  }
 }

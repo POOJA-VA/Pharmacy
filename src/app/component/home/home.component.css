@@ -1070,7 +1070,7 @@ body {
     transition: .3s all ease;
     position: relative;
     top: 0; 
-  opacity: ;}
+  }
     .banner-1:hover {
       top: -10px;
       -webkit-box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.4);

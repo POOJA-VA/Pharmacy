@@ -1,4 +1,4 @@
-<div class="wrapper" style="background-image: url('https://matsuniversity.ac.in/wp-content/uploads/2023/03/pharmacy.jpg'); background-size: cover; background-position: center; padding-top: 20px;">
+<div class="wrapper" style="background-image: url('https://wallpapercave.com/wp/wp8167079.jpg'); background-size: cover; background-position: center; padding-top: 20px;">
   <nav class="nav">
     <div class="nav-logo">
       <p>Pharma</p>
@@ -29,8 +29,14 @@
               [(ngModel)]="user.username"
               name="username"
               required
-            />
-            <i class="bx bx-user"></i>
+              minlength="5"
+          #modelUsername="ngModel"
+          [ngClass]="modelUsername.touched && modelUsername.invalid ? 'is-invalid' : ''"
+        />
+        <i class="bx bx-user"></i>
+        <div *ngIf="modelUsername.invalid && modelUsername.touched" class="invalid-feedback">
+          Username should contain at least 5 characters.
+        </div>
           </div>
           <div class="input-box">
             <input
@@ -40,8 +46,14 @@
               [(ngModel)]="user.name"
               name="name"
               required
+              minlength="3"
+              #modelName="ngModel"
+              [ngClass]="modelName.touched && modelName.invalid ? 'is-invalid' : ''"
             />
             <i class="bx bx-user"></i>
+            <div *ngIf="modelName.invalid && modelName.touched" class="invalid-feedback">
+              Name should have atleast 3 characters.
+            </div>
           </div>
         </div>
         <div class="input-box">
@@ -52,8 +64,14 @@
             [(ngModel)]="user.password"
             name="password"
             required
+            minlength="8"
+            #modelPassword="ngModel"
+            [ngClass]="modelPassword.invalid && modelPassword.touched ? 'is-invalid' : ''"
           />
           <i class="bx bx-envelope"></i>
+          <div *ngIf="modelPassword.invalid && modelPassword.touched" class="invalid-feedback">
+            Password is required and should contain at least 8 characters.
+          </div>
         </div>
         <div class="input-box">
           <input
@@ -63,9 +81,16 @@
             [(ngModel)]="confirmPassword"
             name="confirmPassword"
             required
+            minlength="8"
+            #modelConfirmPassword="ngModel"
+            [ngClass]="modelConfirmPassword.invalid && modelConfirmPassword.touched ? 'is-invalid' : ''"
           />
           <i class="bx bx-lock-alt"></i>
+          <div *ngIf="modelConfirmPassword.invalid && modelConfirmPassword.touched" class="invalid-feedback">
+            Passwords and Confirm Password must be the same.
+          </div>
         </div>
+
         <div class="text-center text-lg-start mt-4 pt-2">
           <button
             type="submit"
