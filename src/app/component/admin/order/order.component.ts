@@ -11,7 +11,7 @@ import { OrderService } from 'src/app/service/order.service';
 export class AdminOrderComponent {
   orderDetails: Order[] = [];
   orderStatus: Status[] = [];
-
+  
   constructor(private orderService: OrderService) {}
   ngOnInit(): void {
     this.orderService.getAllOrderDetails().subscribe({
@@ -24,13 +24,25 @@ export class AdminOrderComponent {
       error: () => console.log('error'),
       complete: () => console.log('completed'),
     });
+    this.orderService.getAllOrderStatus().subscribe({
+      next: (order: any) => {
+        let orderStatus: Status[] = order.data;
+        console.log(orderStatus, 'new');
+        this.orderStatus = orderStatus;
+      },
+
+      error: () => console.log('error'),
+      complete: () => console.log('completed'),
+    });
   }
 
   onStatusChange(order: Order) {
     console.log(order.orderStatus);
-    
-    this.orderService.changeOrderStatus(order.id, order.orderStatus!).subscribe({
-      next:(response: any) => console.log(response.data),
-    });
-    }
+
+    this.orderService
+      .changeOrderStatus(order.id, order.orderStatus!)
+      .subscribe({
+        next: (response: any) => console.log(response.data),
+      });
+  }
 }

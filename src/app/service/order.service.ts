@@ -18,21 +18,6 @@ export class OrderService {
     return this.http.get<Order[]>(`${urlEndpoint.baseUrl}/admin/order/all`);
   }
 
-  // createOrder(userId:number,medicineId:number,addressId:number):Observable<Order[]>{
-  //   let orderdata={
-  //     userId:userId,
-  //     medicineId:medicineId,
-  //     addressId:addressId
-  //   }
-  //   return this.http.post<Order[]>(`${urlEndpoint.baseUrl}/order`,orderdata)
-  // }
-
-  // getorderStatus(): Observable<Status[]> {
-  //   return this.http.get<Status[]>(
-  //     `${urlEndpoint.baseUrl}/admin/order/status`
-  //   );
-  // }
-
   createOrder(
     userId: number,
     addressId: number
@@ -47,6 +32,12 @@ export class OrderService {
   getorderStatus(): Observable<Status[]> {
     return this.http.get<Status[]>(
       `${urlEndpoint.baseUrl}/admin/order/status`
+    );
+  }
+
+  getAllOrderStatus(): Observable<Status[]> {
+    return this.http.get<Status[]>(
+      `${urlEndpoint.baseUrl}/admin/order/status/all`
     );
   }
 

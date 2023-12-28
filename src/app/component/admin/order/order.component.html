@@ -1,33 +1,35 @@
 <div class="min-vh-100 pt-5">
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">orderId</th>
-      <th scope="col">username</th>
-      <th scope="col">orderDetails</th>
-      <th scope="col">Current Status</th>
-      <th scope="col">Price</th>
-      <th scope="col">Order Status</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let order of orderDetails">
-    <tr *ngFor="let item of order.orderedMedicineList">
-      <th>{{ order.id }}</th>
-      <td>{{ order.username }}</td>
-      <td>{{ item.title }}</td>
-      <td>{{ order.orderStatus}}</td>
-      <td>{{ item.price }}</td>
-      <td>
-        <select name="status" [(ngModel)]="order.orderStatus" (change)="onStatusChange(order)">
-          <option>Select Status</option>
-          <option value="1">pending</option>
-          <option value="2">confirmed</option>
-          <option value="3">out of delivery</option>
-          <option value="4">delivered</option>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">orderId</th>
+        <th scope="col">username</th>
+        <th scope="col">orderDetails</th>
+        <th scope="col">Current Status</th>
+        <th scope="col">Price</th>
+        <th scope="col">Order Status</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let order of orderDetails">
+      <tr *ngFor="let item of order.orderedMedicineList">
+        <th>{{ order.id }}</th>
+        <td>{{ order.username }}</td>
+        <td>{{ item.title }}</td>
+        <td>{{ order.orderStatus }}</td>
+        <td>{{ item.price }}</td>
+        <td>
+          <select
+          name="status"
+          [(ngModel)]="order.orderStatus"
+          (change)="onStatusChange(order)"
+        >
+          <option *ngFor="let status of orderStatus" [value]="status.id" [selected]="order.orderStatus === status.id.toString()">
+            {{ status.status }}
+          </option>
         </select>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<a routerLink="/admin"><button>Return</button></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a routerLink="/admin"><button>Return</button></a>
 </div>

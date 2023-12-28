@@ -38,9 +38,9 @@ export class HomeComponent implements OnInit {
       next: (carts: any) => {
         let cartDetails: Product[] = carts.data;
         this.products = cartDetails;
-        // this.totalPages = Math.ceil(this.medicine.length / this.itemsPerPage);
-        // // console.log('Total Pages:', this.totalPages);
-        // this.updatePaginated();
+        this.totalPages = Math.ceil(this.medicine.length / this.itemsPerPage);
+        // console.log('Total Pages:', this.totalPages);
+        this.updatePaginated();
       },
     });
 
@@ -88,24 +88,24 @@ export class HomeComponent implements OnInit {
     this.ngOnInit();
   }
 
-  // updatePaginated() {
-  //   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-  //   const endIndex = startIndex + this.itemsPerPage;
-  //   this.paginatedTours = this.medicine.slice(startIndex, endIndex);
-  // }
-  // nextPage() {
-  //   if (this.currentPage < this.totalPages) {
-  //     this.currentPage++;
-  //     this.updatePaginated();
-  //   }
-  // }
+  updatePaginated() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedMedicine = this.medicine.slice(startIndex, endIndex);
+  }
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaginated();
+    }
+  }
  
-  // prevPage() {
-  //   if (this.currentPage > 1) {
-  //     this.currentPage--;
-  //     this.updatePaginated();
-  //   }
-  // }
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginated();
+    }
+  }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
