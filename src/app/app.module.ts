@@ -20,7 +20,8 @@ import { AdminProductComponent } from './component/admin/product/product.compone
 import { AdminOrderComponent } from './component/admin/order/order.component';
 import { OrderComponent } from './component/order/order.component';
 import { ProfileComponent } from './component/profile/profile.component';
-import { ToastrModule } from 'ngx-toastr';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -45,12 +46,8 @@ import { ToastrModule } from 'ngx-toastr';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-top-right',
-      closeButton: true,
-      progressBar: true,
-      timeOut: 5000,
-    })
+    BrowserAnimationsModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

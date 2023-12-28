@@ -1,8 +1,8 @@
 <div *ngIf="!isLoggedIn">
-  <router-outlet/>
+  <router-outlet />
 </div>
 
-  <!-- navbar started -->
+<!-- navbar started -->
 <div class="site-wrap fixed-top" *ngIf="!isAdmin && isLoggedIn">
   <div class="site-navbar py-2">
     <div class="search-wrap">
@@ -26,7 +26,7 @@
             role="navigation"
           >
             <ul class="site-menu js-clone-nav d-none d-lg-block">
-              <li ><a routerLink="/" *ngIf="!isAdmin">Home</a></li>
+              <li><a routerLink="/" *ngIf="!isAdmin">Home</a></li>
               <li><a routerLink="/cart" *ngIf="!isAdmin">Cart</a></li>
               <li><a routerLink="/orders" *ngIf="!isAdmin">Orders</a></li>
             </ul>
@@ -51,7 +51,10 @@
           ></a>
           <a routerLink="/login"
             ><div class="icons-btn d-inline-block" role="button"></div>
-            <i class="fa-solid fa-solid fa-right-from-bracket text-black" (click)="logout()"></i
+            <i
+              class="fa-solid fa-solid fa-right-from-bracket text-black"
+              (click)="logout()"
+            ></i
           ></a>
         </div>
       </div>
@@ -60,25 +63,22 @@
 </div>
 <!-- navbar ended -->
 
-
-
-
 <div>
-  <div *ngIf="isAdmin" class="row flex-grow-1">
+  <div *ngIf="isAdmin" class="d-flex">
     <div
       class="sidebar border border-right col-2 p-0"
       style="background-color: pink"
     >
       <div class="h-100" tabindex="-1">
-        <div class="d-flex flex-column p-0 pt-3 overflow-y-auto">
+        <div class="d-flex flex-column p-0 pt-3">
           <ul class="nav flex-column">
-            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+            <li class="nav-item d-flex align-items-center px-2 sideBarItem">
               <i class="fa-solid fa-house"></i>
               <a class="nav-link d-flex align-items-center" routerLink="/admin">
                 Dashboard
               </a>
             </li>
-            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+            <li class="nav-item d-flex align-items-center px-2 sideBarItem">
               <i class="fa-solid fa-grip"></i>
               <a
                 class="nav-link d-flex align-items-center"
@@ -86,7 +86,7 @@
                 >Category
               </a>
             </li>
-            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+            <li class="nav-item d-flex align-items-center px-2 sideBarItem">
               <i class="fa-solid fa-book"></i>
               <a
                 class="nav-link d-flex align-items-center"
@@ -94,7 +94,7 @@
                 >Products
               </a>
             </li>
-            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+            <li class="nav-item d-flex align-items-center px-2 sideBarItem">
               <i class="fa-solid fa-user"></i>
               <a
                 class="nav-link d-flex align-items-center"
@@ -102,7 +102,7 @@
                 >Users</a
               >
             </li>
-            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+            <li class="nav-item d-flex align-items-center px-2 sideBarItem">
               <i class="fa-solid fa-clock-rotate-left"></i>
               <a
                 class="nav-link d-flex align-items-center"
@@ -110,7 +110,7 @@
                 >Orders
               </a>
             </li>
-            <li class="nav-item d-flex align-items-center px-4 sideBarItem">
+            <li class="nav-item d-flex align-items-center px-2 sideBarItem">
               <i class="fa-solid fa-user"></i>
               <a class="nav-link d-flex align-items-center" (click)="logout()"
                 >Log Out</a

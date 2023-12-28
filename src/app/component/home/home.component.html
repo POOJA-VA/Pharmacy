@@ -4,7 +4,8 @@
       <div class="col-lg-7 mx-auto order-lg-2 align-self-center">
         <div class="site-block-cover-content text-center">
           <h2 class="sub-title">Effective Medicine, New Medicine Everyday</h2>
-          <h1>Welcome To Pharma</h1>
+          <h1>Welcome To</h1>
+          <h1>Pharma</h1>
         </div>
       </div>
     </div>
@@ -18,9 +19,10 @@
         <div class="banner-wrap bg-primary h-100">
           <a href="#" class="h-100 anchor_remove">
             <h5>
-              Free <br />
+              Free
               Shipping
             </h5>
+            <br />
             <p>
               Zero Shipping charges <br />
               on your first order.
@@ -33,9 +35,10 @@
         <div class="banner-wrap h-100">
           <a href="#" class="h-100 anchor_remove">
             <h5>
-              Season <br />
+              Season 
               Sale 50% Off
             </h5>
+            <br/>
             <p>
               Flat 20% off* on medicines
               <strong
@@ -50,9 +53,10 @@
         <div class="banner-wrap bg-warning h-100">
           <a href="#" class="h-100 anchor_remove">
             <h5>
-              Coupons make your <br />
+              Coupons make your <br/>
               shopping easy
             </h5>
+            <br/>
             <p>
               Get $250 off on order above $999
               <strong>code: PHARMANEW | Limited Period Offer</strong>
@@ -95,7 +99,7 @@
             </div>
             <div class="product-detail-container">
               <div class="d-flex justify-content-between align-items-center">
-                <h6 class="mb-7">{{ product.title }}</h6>
+                <h4>{{ product.title }}</h4>
                 <span class="text-danger font-weight-bold"
                   >₹{{ product.price }}</span
                 >
@@ -112,6 +116,26 @@
             </div>
           </div>
         </div>
+
+        <!-- pagination starts -->
+        <!-- <div class="pagination-controls">
+          <button
+            (click)="prevPage()"
+            [disabled]="currentPage === 1"
+            class="pagination-button"
+          >
+            Previous
+          </button>
+          <span class="pagination-page">{{ currentPage }} of {{ totalPages }}</span>
+          <button
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+            class="pagination-button"
+          >
+            Next
+          </button>
+        </div> -->
+        <!-- pagination ended -->
 
         <div
           class="site-section bg-secondary bg-image"

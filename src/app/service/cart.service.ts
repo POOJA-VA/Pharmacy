@@ -5,9 +5,7 @@ import { Observable } from 'rxjs';
 import { urlEndpoint } from '../utils/constant';
 import { AuthService } from './auth.service';
 import { ProductService } from './product.service';
-import { Product } from '../model/product';
 import { StorageService } from './storage.service';
-import { AppUser } from '../model/appUser';
 
 @Injectable({
   providedIn: 'root',
@@ -24,20 +22,18 @@ export class CartService {
     return this.http.get<Cart[]>(`${urlEndpoint.baseUrl}/cart/${userId}`);
   }
 
-  // deleteCartItem(cartId: number): Observable<any> {
-  //   return this.http.delete<any>(`${urlEndpoint.baseUrl}/cart/${cartId}`);
-  // }
-
-  addItemToCart(item: any): Observable<any> {
-    return this.http.post<any>(`${urlEndpoint.baseUrl}/cart`, item);
+  onDelete(userId:number,medicineId: number): Observable<any> {
+    return this.http.delete<any>(`${urlEndpoint.baseUrl}/cart/${userId}/${medicineId}`);
   }
-
   updateCartItem(cart: Cart): Observable<any> {
     return this.http.put<any>(`${urlEndpoint.baseUrl}/cart/${cart.id}`, cart);
   }
 
-  addToCart(userId: number, productId: number): Observable<Cart[]> {
-    let count: number = 1;
+  addItemToCart(increamentCount: Cart): Observable<any> {
+    return this.http.post<any>(`${urlEndpoint.baseUrl}/cart`, increamentCount);
+  }
+
+  addToCart(userId: number, productId: number,count: number): Observable<Cart[]> {
     const requestData = {
       userId: userId,
       medicineId: productId,
@@ -47,7 +43,7 @@ export class CartService {
     return this.http.post<Cart[]>(`${urlEndpoint.baseUrl}/cart`, requestData);
   }
 
-  deleteCart(id: number, medicineId: number): Observable<Cart[]> {
+  deleteCart(id: number,medicineId:number): Observable<Cart[]> {
     return this.http.delete<Cart[]>(
       `${urlEndpoint.baseUrl}/cart/${id}/${medicineId}`
     );

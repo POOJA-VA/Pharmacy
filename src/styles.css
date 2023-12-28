@@ -96,7 +96,11 @@ body {
 .border {
   border-right-color: var(--primary-300) !important;
 }
-
+ 
+.custom-snackbar{
+  color: #000;
+  border: #000;
+}
 
 /* Custom */
 .error {
@@ -163,3 +167,6 @@ body {
   top: 40%;
   left: 45%;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

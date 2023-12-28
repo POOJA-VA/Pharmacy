@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/model/order';
-import { Orderstatus } from 'src/app/model/orderstatus';
+import { Status } from 'src/app/model/status';
 import { OrderService } from 'src/app/service/order.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { OrderService } from 'src/app/service/order.service';
 })
 export class AdminOrderComponent {
   orderDetails: Order[] = [];
-  orderStatus: Orderstatus[] = [];
+  orderStatus: Status[] = [];
 
   constructor(private orderService: OrderService) {}
   ngOnInit(): void {
@@ -24,9 +24,13 @@ export class AdminOrderComponent {
       error: () => console.log('error'),
       complete: () => console.log('completed'),
     });
-
-    this.orderService
-      .getorderStatus()
-      .subscribe((response) => console.log('status', response));
   }
+
+  onStatusChange(order: Order) {
+    console.log(order.orderStatus);
+    
+    this.orderService.changeOrderStatus(order.id, order.orderStatus!).subscribe({
+      next:(response: any) => console.log(response.data),
+    });
+    }
 }

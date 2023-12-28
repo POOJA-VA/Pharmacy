@@ -1,11 +1,18 @@
 export interface Cart {
-    id:number;
-    title:string;
-    image:File;
-    price:number;
-    quantity:number;
-    total:number;
+    id?: number;
     userId: number;
     medicineId: number;
+    // cartId?: number;
     count: number;
+    price?:number;
+    title?:string;
+    medicine?: {
+      id: number;
+      title: string;
+      description: string;
+      price: number;
+      count: number;
+      photo: string | null;
+      createdAt: string;
+    };
 }

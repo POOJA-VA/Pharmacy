@@ -27,7 +27,6 @@
             <p class="card-text">Description: {{ medicine.description }}</p>
             <p class="card-text">Price: ₹{{ medicine.price }}</p>
             <p class="card-text">Date: {{ medicine.date }}</p>
-            <p class="card-text">Expiry Date: {{ medicine.expirydate }}</p>
             <button
               href=""
               class="btn btn-outline-success btn-sm"
@@ -106,11 +105,6 @@
                           [(ngModel)]="productId"
                         />
                         <div class="mb-3">
-                          <label for="medicineId" class="form-label"
-                            >Medicine ID</label
-                          >
-                        </div>
-                        <div class="mb-3">
                           <label for="medicineTitle" class="form-label"
                             >Medicine Image</label
                           >
@@ -129,60 +123,65 @@
                             >Medicine Title</label
                           >
                           <input
-                            type="text"
-                            class="form-control"
-                            id="title"
+                            id="product_name"
                             placeholder="Medicine Title"
                             name="title"
-                            [(ngModel)]="title"
-                            minlength="4"
+                            class="form-control input-md"
                             required
+                            type="text"
+                            ngModel
+                            minlength="3"
+                            #modelProduct="ngModel"
+                            [ngClass]="
+                              modelProduct.touched && modelProduct.invalid
+                                ? 'is-invalid'
+                                : ''
+                            "
                           />
-                          <div *ngIf="productForm.controls['title']">
-                            Title should have at least 4 characters.
+                          <div
+                            *ngIf="modelProduct.invalid && modelProduct.dirty"
+                            class="invalid-feedback"
+                          >
+                            please enter atleast 3 characters
                           </div>
                         </div>
                         <div class="mb-3">
                           <label for="medicineDescription" class="form-label"
                             >Medicine Description</label
                           >
-                          <textarea
+                            <textarea
                             class="form-control"
-                            id="medicineDescription"
-                            rows="3"
-                            placeholder="Medicine Description"
+                            id="product_description"
                             name="description"
                             [(ngModel)]="description"
-                            minlength="8"
-                            required
+                            ngModel
                           ></textarea>
-                          <div
-                            *ngIf="productForm.controls['description'].errors"
-                          >
-                            Description should have atleast 8 characters.
-                          </div>
                         </div>
                         <div class="mb-3">
                           <label for="medicinePrice" class="form-label"
                             >Medicine Price</label
                           >
                           <input
-                            type="text"
-                            class="form-control"
-                            id="medicinePrice"
-                            placeholder="Medicine Price"
+                            id="Text"
                             name="price"
+                            class="form-control input-md"
+                            required=""
+                            type="number"
                             [(ngModel)]="price"
-                            pattern="^\d+(\.\d{1,2})?$"
-                            required
+                            minlength="2"
+                            #modelPrice="ngModel"
+                            [ngClass]="
+                              modelPrice.touched && modelPrice.invalid
+                                ? 'is-invalid'
+                                : ''
+                            "
                           />
-                            <div
-                              *ngIf="
-                                productForm.controls['price']
-                              "
-                            >
-                              Price must be in numbers.
-                            </div>
+                          <div
+                            *ngIf="modelPrice.invalid && modelPrice.dirty"
+                            class="invalid-feedback"
+                          >
+                            please enter a correct price
+                          </div>
                         </div>
                         <div class="mb-3">
                           <label for="medicineDate" class="form-label"
@@ -195,19 +194,8 @@
                             name="date"
                             [(ngModel)]="date"
                             ngModel
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label for="medicineExpiryDate" class="form-label">
-                            Medicine Expiry Date
-                          </label>
-                          <input
-                            type="date"
-                            class="form-control"
-                            id="medicineExpiryDate"
-                            name="expirydate"
-                            [(ngModel)]="expirydate"
-                            ngModel
+                            [min]="minDate"
+                            required
                           />
                         </div>
                       </form>

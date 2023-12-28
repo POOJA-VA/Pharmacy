@@ -2,7 +2,7 @@ export interface Order {
     id: number;
     date?: Date;
     title?: String; 
-    total: number;
+    total?: number;
     username: String;
     addressId?: number;
     createdAt?: Date;
@@ -13,4 +13,5 @@ export interface Order {
       price: number;
       count: number;
     }[];
+    orderStatus?:string;
   }

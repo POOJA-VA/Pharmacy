@@ -1,13 +1,13 @@
-<div class="min-vh-100">
+<div class="min-vh-100 pt-5">
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">userId</th>
+      <th scope="col">orderId</th>
       <th scope="col">username</th>
       <th scope="col">orderDetails</th>
-      <th scope="col">price</th>
+      <th scope="col">Current Status</th>
+      <th scope="col">Price</th>
       <th scope="col">Order Status</th>
-      <th scope="col">Confirm Status</th>
     </tr>
   </thead>
   <tbody *ngFor="let order of orderDetails">
@@ -15,17 +15,17 @@
       <th>{{ order.id }}</th>
       <td>{{ order.username }}</td>
       <td>{{ item.title }}</td>
+      <td>{{ order.orderStatus}}</td>
       <td>{{ item.price }}</td>
       <td>
-        <select name="status">
-          <option value="status">Select Status</option>
-          <option>pending</option>
-          <option>out of delivery</option>
-          <option>confirmed</option>
-          <option>delivered</option>
+        <select name="status" [(ngModel)]="order.orderStatus" (change)="onStatusChange(order)">
+          <option>Select Status</option>
+          <option value="1">pending</option>
+          <option value="2">confirmed</option>
+          <option value="3">out of delivery</option>
+          <option value="4">delivered</option>
         </select>
       </td>
-      <td><button class="btn btn-danger">Change</button></td>
     </tr>
   </tbody>
 </table>

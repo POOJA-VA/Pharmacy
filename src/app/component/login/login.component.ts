@@ -1,11 +1,9 @@
 import { Component } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppResponse } from "src/app/model/appResponse";
 import { Login } from "src/app/model/login";
 import { AuthService } from "src/app/service/auth.service";
-import { ToasterServiceService } from "src/app/service/toaster-service.service";
-import { ToasterService } from "src/app/service/toaster.service";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
@@ -16,7 +14,7 @@ export class LoginComponent {
   password: String = "";
   error: String = "";
 
-  constructor(private authService: AuthService,private toaster:ToastrService) {}
+  constructor(private authService: AuthService,private snackBar: MatSnackBar) {}
 
   login(loginForm: NgForm): void {
     let login: Login = {
@@ -28,7 +26,7 @@ export class LoginComponent {
     this.authService.login(loginForm.value).subscribe({
       next: (response: AppResponse) => {
         this.authService.setLoggedIn(response.data);
-        this.toaster.success("Login Successfully");
+          this.openSnackBar('Login Successfully!!!', 'Close');
       },
       error: (err) => {
         let message: String = err.error.error.message;
@@ -37,4 +35,12 @@ export class LoginComponent {
       complete: () => console.log("There are no more action happen."),
     });
   }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000, // Specify the duration for the snackbar (in milliseconds)
+      panelClass: ['snackbar-custom-class'] // Optional: Apply custom styling via CSS class
+    });
+  }
+  
 }

@@ -1,4 +1,4 @@
-  <section class="h-100 gradient-custom">
+  <div class="h-100 pt-5 mt-5 gradient-custom">
     <div class="container px-10 py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-10 col-xl-8">
@@ -6,24 +6,27 @@
             <div class="card-header px-4 py-5">
               <h5 class="text-muted mb-0">Thanks for your Order!</h5>
             </div>
-            <div class="card-body p-4" *ngFor="let item of orderDetails">
-              <div class="card shadow-0 border mb-4" *ngFor="let medicine of item.orderedMedicineList">
+            <div class="card-body p-4" *ngFor="let order of orders">
+              <div class="card shadow-0 border mb-4" *ngFor="let item of order.orderedMedicineList; let i = index">
                 <div class="card-body">
                   <div class="row justify-content-around">
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0">ID:{{ item.id }}</p>
+                      <p class="text-muted mb-0">ID:{{order.id}}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small">Products:{{ medicine.title }}</p>
+                      <p class="text-muted mb-0 small">Title:{{ item.title }}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small">Quantity:{{ medicine.count }}</p>
+                      <p class="text-muted mb-0 small">Quantity:{{ item.count }}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0 small">Price:₹{{ medicine.price * medicine.count }}</p>
+                      <p class="text-muted mb-0 small">Price:₹{{ item.price }}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">Total:₹{{ item.count * item.price }}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center" style="color: brown;">
-                      <p class="text-muted mb-0 small">Status : Pending</p>
+                      <p class="text-muted mb-0 small">Status : {{ order.orderStatus }}</p>
                     </div>
                   </div>
                 </div>
@@ -36,4 +39,4 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>

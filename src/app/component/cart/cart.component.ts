@@ -1,5 +1,6 @@
 import { Component, OnInit, numberAttribute } from '@angular/core';
-import { AppUser } from 'src/app/model/appUser';
+import { Router } from '@angular/router';
+import { AppResponse } from 'src/app/model/appResponse';
 import { Cart } from 'src/app/model/cart';
 import { Order } from 'src/app/model/order';
 import { CartService } from 'src/app/service/cart.service';
@@ -13,134 +14,117 @@ import { StorageService } from 'src/app/service/storage.service';
 })
 export class CartComponent implements OnInit {
   carts: Cart[] = [];
+  cartItem: Cart[] = this.storageService.getCart()!;
+  orders: Order[] = [];
+  addressId: number = 1;
+  error: string = '';
+  username: String = '';
   userId = this.storageService.getLoggedInUser().id;
+  medicineId:number=0;
   totalValue: number = 0;
-  total: number = 0;
-  selectedItem: string = '';
-  user: AppUser = {
-    id: 0,
-    username: '',
-    password: '',
-    role: '',
-  };
-  itemCount: number = 1;
 
   constructor(
     private cartService: CartService,
     private storageService: StorageService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private router: Router
   ) {}
-
   ngOnInit(): void {
     this.cartService.fetchCart(this.userId).subscribe({
-      next: (carts: any) => {
-        let cartDetails: Cart[] = carts.data;
+      next: (response: any) => {
+        console.log(response.data);
+        
+        let cartDetails: Cart[] = response.data.cartRequests;
         this.carts = cartDetails;
+        // this.calculateTotalValue();
+        console.log(this.carts);
+        
       },
     });
   }
 
-  addCartItemToCart(item: any): void {
-    this.cartService.addItemToCart(item).subscribe({
-      next: () => {
-        this.cartService.fetchCart(this.userId).subscribe({
-          next: (carts: any) => {
-            let cartDetails: Cart[] = carts.data;
-            this.carts = cartDetails;
-          },
-        });
-      },
-    });
-  }
-
-  updateCartItem(cart: Cart): void {
-    let loggedInUser = this.storageService.getLoggedInUser();
-    let userId = loggedInUser.id;
-    this.cartService.updateCartItem(cart).subscribe({
-      next: () => {
-        this.cartService.fetchCart(userId).subscribe({
-          next: (carts: any) => {
-            let cartDetails: Cart[] = carts.data;
-            this.carts = cartDetails;
-          },
-        });
-      },
-    });
-  }
-
-  onDelete(id: number): void {
-    this.cartService.deleteCart(this.userId, id).subscribe({
-      next: () => {
+  onDelete(id: number | undefined, medicineId: number | undefined): void {
+    console.log(id,medicineId);
+    
+    this.cartService.deleteCart(id!,medicineId!).subscribe({
+      next: (cart: Cart[]) => {
+        this.carts = cart;
         this.ngOnInit();
+        console.log(cart);
       },
+      complete: () => console.log('deleted'),
+      error: () => console.log('error'),
     });
   }
-
-  increamentCount(cart: Cart):void {
-    cart.count += 1;
-    this.countIncreaseOrDecrease(cart);
-  }
-  decrementCount(cart: Cart):void {
-    if (cart.count != 1) {
-      cart.count -= 1;
-      this.countIncreaseOrDecrease(cart);
-    }
-  }
-
- private countIncreaseOrDecrease(cart: Cart): void {
-    this.cartService
-      .cartCountUpdate(this.user.id, cart.medicineId, cart.count, this.total)
-      .subscribe((response) => console.log(response));
-    this.calculateTotalValue();
-  }
-
-  calculateTotalValue(): number {
-    this.carts.forEach((cartItem) => {
-      this.totalValue = 0;
-      if (cartItem.count != null) {
-        this.totalValue += cartItem.price * cartItem.count;
-      } else {
-        this.totalValue += cartItem.price;
-      }
-    });
-    return this.totalValue;
-  }
-
-  cartItem: Cart[] = this.storageService.getCart()!;
-  orders: Order[] = [];
-  addressId: number = 1;
 
   checkOut(): Order[] {
-    for (let cart of this.cartItem) {
-      this.orders.push({
+    for (let item of this.carts) {
+      let newOrder: Order = {
         id: 0,
-        total: cart.total,
-        username: this.storageService.getLoggedInUser().username,
+        username: this.storageService.getLoggedInUser().username || '',
         orderedMedicineList: [
           {
-            id: cart.medicineId,
-            title: cart.title,
-            price: cart.price,
-            count: cart.count,
+            id: item.medicine?.id || 0,
+            title: item.medicine?.title || '',
+            description: item.medicine?.description || '',
+            price: item.medicine?.price || 0,
+            count: item.count || 0,
           },
         ],
-      });
+      };0
+      this.orders.push(newOrder);
 
       this.orderService
-        .createOrder(cart.userId, cart.medicineId, this.addressId)
+        .createOrder(this.storageService.getLoggedInUser().id, this.addressId)
         .subscribe({
           next: (response: Order[]) => {
             console.log('response', response);
-            this.orders = response;
-            this.ngOnInit();
           },
           complete: () => console.log('orderCreated'),
           error: () => console.log('error'),
         });
     }
     this.storageService.setOrder(this.orders);
+    this.router.navigate(['/order'], { replaceUrl: true });
     return this.orders;
   }
+
+  increamentCount(cart: Cart) {
+    if (cart.medicine && cart.count !== null && cart.count >= 1) {
+      {
+        cart.count += 1;
+        let increaseCount = {
+          userId: this.userId,
+          medicineId: cart.medicine.id,
+          count: cart.count,
+        };
+      //   this.cartService
+      //     .addItemToCart(increaseCount)
+      //     .subscribe((response) => console.log(response));
+      }
+    }
+  }
+
+  decrementCount(cart: Cart) {
+    if (cart.medicine && cart.count !== null && cart.count > 1) {
+      {
+        cart.count -= 1;
+        let decreaseCount = {
+          userId: this.userId,
+          medicineId: cart.medicine.id,
+          count: cart.count,
+        };
+        this.cartService
+          .addItemToCart(decreaseCount)
+          .subscribe((response) => console.log(response));
+      }
+    }
+  }
+
+  calculateTotalValue(): void {
+    this.totalValue = this.carts.reduce(
+      (acc, cart) => acc + cart.count * cart.price!,
+      0
+    );
+  }
 }
-
-
