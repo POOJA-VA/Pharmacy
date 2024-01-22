@@ -1,14 +1,8 @@
-  table {
-    text-align: center;
-}
-tr:nth-child(odd) {
-  background-color: rgba(84, 186, 205, 0.4);
-}
-
-th:nth-child(odd),td:nth-child(odd) {
-  background-color: rgba(84, 186, 205, 0.4);
-}
 table, th, td {
-  border: 1px solid black;
-  border-radius: 10px;
+  border-collapse: collapse;
+  border: 1px solid white;
+}
+th, td {
+  background-color: rgb(193, 216, 160);
+  text-align: center;
 }

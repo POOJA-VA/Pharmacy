@@ -22,7 +22,6 @@ export class LoginComponent {
       password: this.password,
     };
     console.log(loginForm.value);
-    
     this.authService.login(loginForm.value).subscribe({
       next: (response: AppResponse) => {
         this.authService.setLoggedIn(response.data);
@@ -42,5 +41,4 @@ export class LoginComponent {
       panelClass: ['snackbar-custom-class'] // Optional: Apply custom styling via CSS class
     });
   }
-  
 }

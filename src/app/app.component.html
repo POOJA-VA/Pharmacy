@@ -28,28 +28,26 @@
             <ul class="site-menu js-clone-nav d-none d-lg-block">
               <li><a routerLink="/" *ngIf="!isAdmin">Home</a></li>
               <li><a routerLink="/cart" *ngIf="!isAdmin">Cart</a></li>
-              <li><a routerLink="/orders" *ngIf="!isAdmin">Orders</a></li>
+              <li><a routerLink="/order" *ngIf="!isAdmin">Orders</a></li>
             </ul>
           </nav>
         </div>
 
         <div class="icons">
-          <a routerLink="/profile">
+          <a routerLink="/profile" title="Profile">
             <i class="fas fa-user"></i>
           </a>
-          <a routerLink="/cart" class="icons-btn d-inline-block bag">
+          <a
+            routerLink="/cart"
+            class="icons-btn d-inline-block bag"
+            title="Cart"
+          >
             <span class="icon-shopping-bag"
               ><i class="fa fa-cart-shopping"></i
             ></span>
-            <span class="number">0</span>
-            <!-- {{ getcount() > 0 ? getcount() : "" }} -->
+            <span class="number">{{cartCount}}</span>
           </a>
-          <a
-            href="#"
-            class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"
-            ><span class="icon-menu"></span
-          ></a>
-          <a routerLink="/login"
+          <a routerLink="/login" title="Log Out"
             ><div class="icons-btn d-inline-block" role="button"></div>
             <i
               class="fa-solid fa-solid fa-right-from-bracket text-black"

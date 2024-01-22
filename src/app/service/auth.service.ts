@@ -83,6 +83,5 @@ export class AuthService {
       `${urlEndpoint.baseUrl}/auth/register`,
       user
     );
-   
   }
 }

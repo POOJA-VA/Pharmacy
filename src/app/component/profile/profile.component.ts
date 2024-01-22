@@ -20,7 +20,6 @@ export class ProfileComponent implements OnInit{
   constructor(
     private profileService: ProfileService,
     private storageService: StorageService
-
   ) {}
 
   ngOnInit(): void {

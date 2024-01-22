@@ -2,7 +2,6 @@ export interface Cart {
     id?: number;
     userId: number;
     medicineId: number;
-    // cartId?: number;
     count: number;
     price?:number;
     title?:string;

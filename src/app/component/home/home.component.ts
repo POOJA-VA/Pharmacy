@@ -16,15 +16,15 @@ export class HomeComponent implements OnInit {
   cartItem: number = 0;
   products: Product[] = [];
   carts: Cart[] = [];
+  paginatedCarts: Cart[] = [];
   user: AppUser = this.storageService.getLoggedInUser();
   totalValue: number = 0;
   selectedItem: string = '';
   total: number = 0;
   itemCount: number = 1;
   count=0;
-  itemsPerPage = 6;
-  currentPage = 1;
-  totalPages = 1;
+  itemsPerPage: number = 3;
+  currentPage: number = 1;
 
   constructor(
     private productService: ProductService,
@@ -38,9 +38,6 @@ export class HomeComponent implements OnInit {
       next: (carts: any) => {
         let cartDetails: Product[] = carts.data;
         this.products = cartDetails;
-        this.totalPages = Math.ceil(this.medicine.length / this.itemsPerPage);
-        // console.log('Total Pages:', this.totalPages);
-        this.updatePaginated();
       },
     });
 
@@ -50,7 +47,7 @@ export class HomeComponent implements OnInit {
         let cartDetails: Cart[] = carts.data;
         console.log(carts);
         this.carts = cartDetails;
-        this.calculateTotalValue();
+        // this.calculateTotalValue();
       },
       error: () => console.log('error'),
     });
@@ -60,23 +57,15 @@ export class HomeComponent implements OnInit {
     console.log(productId);
     this.count++;
     this.cartService
-      .addToCart(this.storageService.getLoggedInUser()?.id, productId,this.count)
+      .addToCart(this.storageService.getLoggedInUser()?.id, productId, this.count)
       .subscribe(
         (Response) => console.log(Response),
       );
-      this.openSnackBar('Product Added!!!', 'Close');
-  }
-
-  calculateTotalValue(): void {
-    this.totalValue = this.carts.reduce(
-      (acc, cart) => acc + cart.count * cart.price!,
-      0
-    );
+    this.openSnackBar('Product Added!!!', 'Close');
   }
 
   onDelete(deleteId: number, productId: number): void {
     console.log(deleteId, productId);
-
     this.cartService.deleteCart(deleteId,productId).subscribe({
       next: (cart: Cart[]) => {
         this.carts = cart;
@@ -88,23 +77,13 @@ export class HomeComponent implements OnInit {
     this.ngOnInit();
   }
 
-  updatePaginated() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    this.paginatedMedicine = this.medicine.slice(startIndex, endIndex);
+  getPageNumbers(): number[] {
+    const pageCount = Math.ceil(this.products.length / this.itemsPerPage);
+    return Array.from({ length: pageCount }, (_, index) => index + 1);
   }
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.updatePaginated();
-    }
-  }
- 
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updatePaginated();
-    }
+
+  getLastPage(): number {
+    return this.getPageNumbers().slice(-1)[0] || 1;
   }
 
   openSnackBar(message: string, action: string) {

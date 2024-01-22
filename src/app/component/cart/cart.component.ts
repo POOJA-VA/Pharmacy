@@ -1,6 +1,5 @@
 import { Component, OnInit, numberAttribute } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppResponse } from 'src/app/model/appResponse';
 import { Cart } from 'src/app/model/cart';
 import { Order } from 'src/app/model/order';
 import { CartService } from 'src/app/service/cart.service';
@@ -20,7 +19,7 @@ export class CartComponent implements OnInit {
   error: string = '';
   username: String = '';
   userId = this.storageService.getLoggedInUser().id;
-  medicineId:number=0;
+  medicineId: number = 0;
   totalValue: number = 0;
 
   constructor(
@@ -33,20 +32,18 @@ export class CartComponent implements OnInit {
     this.cartService.fetchCart(this.userId).subscribe({
       next: (response: any) => {
         console.log(response.data);
-        
+
         let cartDetails: Cart[] = response.data.cartRequests;
         this.carts = cartDetails;
-        // this.calculateTotalValue();
+        this.calculateTotalValue();
         console.log(this.carts);
-        
       },
     });
   }
 
   onDelete(id: number | undefined, medicineId: number | undefined): void {
-    console.log(id,medicineId);
-    
-    this.cartService.deleteCart(id!,medicineId!).subscribe({
+    console.log(id, medicineId);
+    this.cartService.deleteCart(id!, medicineId!).subscribe({
       next: (cart: Cart[]) => {
         this.carts = cart;
         this.ngOnInit();
@@ -71,7 +68,8 @@ export class CartComponent implements OnInit {
             count: item.count || 0,
           },
         ],
-      };0
+      };
+      0;
       this.orders.push(newOrder);
 
       this.orderService
@@ -90,41 +88,53 @@ export class CartComponent implements OnInit {
   }
 
   increamentCount(cart: Cart) {
-    if (cart.medicine && cart.count !== null && cart.count >= 1) {
-      {
-        cart.count += 1;
-        let increaseCount = {
-          userId: this.userId,
-          medicineId: cart.medicine.id,
-          count: cart.count,
-        };
-      //   this.cartService
-      //     .addItemToCart(increaseCount)
-      //     .subscribe((response) => console.log(response));
-      }
+    console.log('out');
+    console.log(cart);
+
+    if (cart.medicineId && cart.count !== null && cart.count >= 1) {
+      console.log('in');
+      cart.count += 1;
+      let increaseCount: Cart = {
+        id: 0,
+        userId: this.userId,
+        medicineId: cart.medicineId,
+        count: cart.count,
+      };
+      console.log(increaseCount, 'new');
+      this.cartService
+        .cartCountUpdate(increaseCount)
+        .subscribe((response) => console.log(response));
     }
   }
 
   decrementCount(cart: Cart) {
-    if (cart.medicine && cart.count !== null && cart.count > 1) {
-      {
-        cart.count -= 1;
-        let decreaseCount = {
-          userId: this.userId,
-          medicineId: cart.medicine.id,
-          count: cart.count,
-        };
-        this.cartService
-          .addItemToCart(decreaseCount)
-          .subscribe((response) => console.log(response));
-      }
+    if (cart.medicineId && cart.count !== null && cart.count > 1) {
+      cart.count -= 1;
+      let decreaseCount: Cart = {
+        id: 0,
+        userId: this.userId,
+        medicineId: cart.medicineId,
+        count: cart.count,
+      };
+      this.cartService
+        .cartCountUpdate(decreaseCount)
+        .subscribe((response) => console.log(response));
     }
   }
 
-  calculateTotalValue(): void {
-    this.totalValue = this.carts.reduce(
-      (acc, cart) => acc + cart.count * cart.price!,
-      0
-    );
+  calculateTotalValue(): number {
+    let total = 0;
+    for (const cart of this.carts) {
+      total += cart.price! * cart.count;
+    }
+    return total;
+  }
+
+  calculateGST() {
+    let total = 0;
+    for (const cart of this.carts) {
+      total += cart.price! * cart.count;
+    }
+    return total + 50;
   }
 }

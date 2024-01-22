@@ -9,9 +9,7 @@ import { CategoryService } from "src/app/service/category.service";
 export class CategoryComponent implements OnInit{
   error: string = "";
   INITIAL_CATEGORY: Category = { id: 0, title: "" };
-
   emitterValue=false;
-
   categories: Category[] = [];
   categoryModel: Category = this.INITIAL_CATEGORY;
 
@@ -64,10 +62,6 @@ export class CategoryComponent implements OnInit{
     }
   }
 
-  getCategory(category: Category) {
-    // console.log(category);
-    this.categoryModel = category;
-  }
 
   onEdit(category: Category) {
     this.categoryModel = { ...category };

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Category } from 'src/app/model/category';
 import { Product } from 'src/app/model/product';
+import { CategoryService } from 'src/app/service/category.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -8,7 +10,7 @@ import { ProductService } from 'src/app/service/product.service';
   templateUrl: './product.component.html',
 })
 export class AdminProductComponent implements OnInit {
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,private categoryService : CategoryService) {
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
   }
@@ -25,11 +27,12 @@ export class AdminProductComponent implements OnInit {
   photo: string = '';
   medicines: Product[] = [];
   file = '';
-  productId: number = 0;
+  categories: Category[] = [];
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe({
       next: (response: any) => {
+        console.log(response.data);
         this.medicines = response.data;
       },
       error: (err) => {
@@ -37,75 +40,48 @@ export class AdminProductComponent implements OnInit {
         this.error = message.includes(',') ? message.split(',')[0] : message;
       },
     });
+    this.categoryService.getCategories().subscribe({
+      next:(response:any)=>{
+        this.categories=response.data;
+      }
+    })
   }
 
   onSubmit(form: NgForm) {
-    // if (this.id == 0) {
     console.log(form.value);
     let formValue: Product = form.value;
     const formData = new FormData();
-    formData.append('id', form.value.productId);
+    console.log(form.value.id);
+    formData.append('id', this.id.toString());
     formData.append('photo', this.file);
-    formData.append('categoryId', '1');
+    formData.append('categoryId', form.value.categoryId);
     formData.append('title', formValue.title);
     formData.append('date', formValue.date);
     formData.append('description', formValue.description);
-    formData.append('expirydate', formValue.expirydate);
     formData.append('price', formValue.price.toString());
-    console.log(formData, 'check');
 
     this.productService.addProduct(formData).subscribe({
       next: () => {
+        this.id = 0;
         this.title = '';
         this.description = '';
         this.price = 0;
+        this.date = '';
+        this.photo = '';
         this.ngOnInit();
+        form.resetForm();
       },
       error: (err) => {
+        console.error(err);
         let message: string = err?.error?.error?.message;
         this.error = message.includes(',') ? message.split(',')[0] : message;
       },
     });
   }
-    // }
-    //  else {
-    //   console.log('ekskkdjm');
-
-    //   const formData = new FormData();
-    //   formData.append('photo', this.file);
-    //   formData.append('categoryId', '1');
-    //   formData.append('id', this.id.toString());
-    //   formData.append('title', form.value.title);
-    //   formData.append('date', form.value.date);
-    //   formData.append('description', form.value.description);
-    //   formData.append('expirydate', form.value.expirydate);
-    //   formData.append('price', form.value.price.toString());
-    //   console.log(formData, 'check');
-    //   this.productService.updateProducts(formData).subscribe({
-    //     next: (response: any) => {
-    //       this.medicines = response.data;
-    //       this.title = '';
-    //       this.description = '';
-    //       this.price = 0;
-    //       this.date;
-    //       this.expirydate;
-    //       this.photo;
-    //       this.btn = 'ADD';
-    //     },
-    //     error: (err) => {
-    //       let message: string = err?.error?.error?.message;
-    //       this.error =
-    //         message != null && message.includes(',')
-    //           ? message.split(',')[0]
-    //           : message;
-    //     },
-    //   });
-    // }
 
   onEdit(id: number) {
-    this.productId = id;
-    this.btn = 'Edit';
     this.id = id;
+    this.btn = 'Edit';
     this.editId = -1;
     let newCategory = this.medicines.find((o) => o.id == id);
     this.title = newCategory?.title!;

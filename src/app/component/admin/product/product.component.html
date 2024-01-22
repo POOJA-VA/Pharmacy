@@ -1,5 +1,5 @@
 <nav class="bg-dark navbar-dark"></nav>
-<section id="header" class="jumbotron text-center">
+<div id="header" class="jumbotron text-center">
   <h1 class="display-3">PRODUCT LIST</h1>
   <a
     type="button"
@@ -9,9 +9,9 @@
     style="color: black; background-color: plum"
     >Add Products</a
   >
-</section>
+</div>
 
-<section id="gallery">
+<div id="gallery">
   <div class="container">
     <div class="row">
       <div class="col-lg-4 mb-4" *ngFor="let medicine of medicines">
@@ -48,7 +48,7 @@
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- Modal -->
 <div
@@ -76,7 +76,7 @@
           <div class="row">
             <div class="col-md-12">
               <img
-                src="https://rishihood.edu.in/wp-content/uploads/2020/05/API-Pharmacy.jpg"
+                src="https://cdn.pixabay.com/photo/2017/12/03/12/38/medicine-2994788_1280.jpg"
                 class="img-fluid mb-4"
                 alt="Pharmacy Image"
               />
@@ -100,9 +100,9 @@
                       >
                         <input
                           type="hidden"
-                          name="productId"
+                          name="id"
                           ngModel
-                          [(ngModel)]="productId"
+                          [(ngModel)]="id"
                         />
                         <div class="mb-3">
                           <label for="medicineTitle" class="form-label"
@@ -119,6 +119,22 @@
                           />
                         </div>
                         <div class="mb-3">
+                          <label for="category-select" class="col-form-label">Category</label>
+                          <select
+                            id="category-select"
+                            class="form-select"
+                            class="form-control"
+                            aria-label="Default select example"
+                            name="categoryId"
+                            ngModel
+                          >
+                            <option value="" selected>Select Category</option>
+                            <option *ngFor="let category of categories" [value]="category.id">
+                              {{ category.title }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
                           <label for="medicineTitle" class="form-label"
                             >Medicine Title</label
                           >
@@ -131,6 +147,8 @@
                             type="text"
                             ngModel
                             minlength="3"
+                            [(ngModel)]="title"
+
                             #modelProduct="ngModel"
                             [ngClass]="
                               modelProduct.touched && modelProduct.invalid
@@ -155,8 +173,15 @@
                             name="description"
                             [(ngModel)]="description"
                             ngModel
+                            minlength="8"
                           ></textarea>
                         </div>
+                        <div
+                        *ngIf="modelProduct.invalid && modelProduct.dirty"
+                        class="invalid-feedback"
+                      >
+                        please enter atleast 8 characters
+                      </div>
                         <div class="mb-3">
                           <label for="medicinePrice" class="form-label"
                             >Medicine Price</label

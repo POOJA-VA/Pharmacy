@@ -9,7 +9,7 @@ import { Order } from "../model/order";
 export class StorageService {
   constructor() {}
 
-  setLoggedInUser(user: AppUser): void {
+  public setLoggedInUser(user: AppUser): void {
     localStorage.setItem("loggedInUser", JSON.stringify(user));
   }
 
@@ -33,7 +33,7 @@ export class StorageService {
     localStorage.removeItem("route");
   }
 
-  setAuthData(authData: string) {
+  public setAuthData(authData: string) {
     localStorage.setItem("authData", authData);
   }
 
@@ -49,19 +49,15 @@ export class StorageService {
     localStorage.setItem('cart', JSON.stringify(cart));
   }
 
-  setOrder(order: Order[]): void{
+ public setOrder(order: Order[]): void{
     localStorage.setItem('orders', JSON.stringify(order));
   }
 
-  getAllUsers(): AppUser[] {
+  public getAllUsers(): AppUser[] {
     return JSON.parse(localStorage.getItem('users') as string);
   }
 
-  getCart(): Cart[] {
-    let cart = JSON.parse(localStorage.getItem('cart') as string);
-    if (cart === null) {
-      cart = [];
-    }
-    return cart;
+  public getCart(): Cart[] {
+   return JSON.parse(localStorage.getItem('cart') || '[]');
   }
 }

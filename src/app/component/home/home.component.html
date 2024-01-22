@@ -78,7 +78,10 @@
 
     <div class="container-fluid mt-3 mb-3">
       <div class="row g-2">
-        <div class="col-md-4" *ngFor="let product of products">
+        <div class="col-md-4" *ngFor="let product of products.slice(
+          (currentPage - 1) * itemsPerPage,
+          currentPage * itemsPerPage
+        )">
           <div class="card p-3">
             <div class="img-container">
               <div
@@ -108,7 +111,9 @@
                 <button
                   class="btn btn-primary btn-block"
                   style="color: black"
+                  routerLink="/cart"
                   (click)="addToCart(product.id)"
+     
                 >
                   Add To cart
                 </button>
@@ -118,23 +123,26 @@
         </div>
 
         <!-- pagination starts -->
-        <div class="pagination-controls">
-          <button
-            (click)="prevPage()"
-            [disabled]="currentPage === 1"
-            class="pagination-button"
+        <ul
+        class="pagination justify-content-center mt-3 custom-pagination"
+        *ngIf="products.length > 0"
+      >
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="currentPage = currentPage - 1"
+            >Previous</a
           >
-            Previous
-          </button>
-          <span class="pagination-page">{{ currentPage }} of {{ totalPages }}</span>
-          <button
-            (click)="nextPage()"
-            [disabled]="currentPage === totalPages"
-            class="pagination-button"
-          >
-            Next
-          </button>
-        </div>
+        </li>
+        <li
+          class="page-item text-danger"
+          *ngFor="let page of getPageNumbers()"
+          [class.active]="currentPage === page"
+        >
+          <a class="page-link" (click)="currentPage = page">{{ page }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === getLastPage()">
+          <a class="page-link" (click)="currentPage = currentPage + 1">Next</a>
+        </li>
+      </ul>
         <!-- pagination ended -->
 
         <div

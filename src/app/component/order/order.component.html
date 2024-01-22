@@ -11,7 +11,10 @@
                 <div class="card-body">
                   <div class="row justify-content-around">
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                      <p class="text-muted mb-0">ID:{{order.id}}</p>
+                      <p class="text-muted mb-0"
+                        *ngIf="i===0"
+                        [attr.rowspan]="order.orderedMedicineList.length">
+                        ID:{{order.id}}</p>
                     </div>
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                       <p class="text-muted mb-0 small">Title:{{ item.title }}</p>
@@ -25,7 +28,7 @@
                     <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                       <p class="text-muted mb-0 small">Total:₹{{ item.count * item.price }}</p>
                     </div>
-                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center" style="color: brown;">
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                       <p class="text-muted mb-0 small">Status : {{ order.orderStatus }}</p>
                     </div>
                   </div>
